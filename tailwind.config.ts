@@ -25,6 +25,10 @@ const config: Config = {
       borderRadius: {
         "4xl": "2rem",
       },
+      fontFamily: {
+        raleway: ["Raleway", "sans-serif"],
+        poppins: ["Poppins", "sans-serif"],
+      },
     },
   },
   plugins: [],

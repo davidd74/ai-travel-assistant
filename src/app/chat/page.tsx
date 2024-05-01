@@ -1,134 +1,167 @@
 "use client";
 
+import axios from "axios";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { useEffect } from "react";
+import AirplaneIcon from "@/public/icons/AirplaneIcon";
+import "animate.css";
 
 const Page = () => {
   const [chatMessage, setChatMessage] = React.useState("");
+  const [messageCollection, setMessageCollection] = React.useState<any[]>([]);
+  const ref = React.useRef<HTMLDivElement>(null);
+
+  const itenary = [
+    {
+      day: 1,
+      morning: "Arrive in Split and check into your accommodation.",
+      afternoon:
+        "Explore the historic Diocletian's Palace and wander through the narrow streets of the Old Town.",
+      evening: "Enjoy a traditional Croatian dinner at a local restaurant.",
+      destination: "Split",
+      budget: "500euros",
+      activities: ["exploration of nature", "partying"],
+    },
+    {
+      day: 2,
+      morning:
+        "Take a morning hike in the nearby Marjan Forest Park, enjoying the natural beauty and stunning views of the city and the Adriatic Sea.",
+      afternoon:
+        "Visit the beautiful Bačvice Beach and relax in the sun or try some water activities.",
+      evening:
+        "Experience the vibrant nightlife of Split by visiting some of the popular bars and clubs in the city center.",
+      destination: "Split",
+      budget: "500euros",
+      activities: ["exploration of nature", "partying"],
+    },
+    {
+      day: 3,
+      morning:
+        "Enjoy a final breakfast in Split before checking out of your accommodation.",
+      afternoon: "",
+      evening: "",
+      destination: "Split",
+      budget: "500euros",
+      activities: ["exploration of nature", "partying"],
+    },
+  ];
+
+  const submitMessageHandler = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    try {
+      const userMessage = { role: "user", content: chatMessage };
+      setMessageCollection((prevMessages) => [...prevMessages, userMessage]);
+      setChatMessage("");
+
+      const response = await axios.post("/api/ai-assistant", {
+        message: [...messageCollection, userMessage],
+      });
+
+      const assistantMessage = {
+        role: "assistant",
+        content: response.data.content[0].text,
+      };
+      setMessageCollection((prevMessages) => [
+        ...prevMessages,
+        assistantMessage,
+      ]);
+      console.log(response.data.content[0].text);
+    } catch (error) {
+      console.error("Error submitting message:", error);
+    }
+  };
+
+  useEffect(() => {
+    if (messageCollection.length) {
+      ref.current?.scrollIntoView({ behavior: "smooth", block: "end" });
+    }
+  }, [messageCollection.length]);
 
   return (
-    <>
+    <div className="font-poppins">
       <div className="p-2 h-[55px] flex items-center">
         <Link href="/" className="font-semibold">
           Go home
         </Link>
       </div>
       <div className="flex">
-        <div className="md:w-[265px] text-black chat-screen-height border-t-[1px] border-r-2 border-gray-300 shadow-sm">
+        <div className="hidden md:block md:w-[265px] text-black chat-screen-height border-t-[1px] border-r-2 border-gray-300 shadow-sm ">
           sidebar
         </div>
         <div className="flex w-full border-t-[1px] border-gray-300">
-          <div className="w-2/3 relative border-r-2 shadow-sm bg-light-background">
-            <div className="bg-light-box_bg py-2 px-4 border-2 flex shadow-md gap-2 items-center justify-between">
-              <div className="flex gap-2 items-center">
-                <Image
-                  src={"/images/assistant-pfp.webp"}
-                  width={300}
-                  height={300}
-                  alt="assistant-pfp"
-                  className="rounded-full aspect-square w-10"
-                />
-                <span className="font-semibold bg-light">
-                  AI Travel Assistant
-                </span>
-              </div>
-
-              <div className="text-green-500 font-semibold flex gap-2 items-center">
-                <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                <span>Online</span>
+          <div className="w-full md:w-2/3 relative border-r-2 shadow-sm bg-light-background">
+            <div className="bg-light-box_bg py-3 px-4 border-b-2 flex shadow-sm gap-2 items-center justify-between">
+              <div className="flex flex-col gap-2 items-center">
+                <div className="flex gap-4 items-center">
+                  <Image
+                    src={"/images/assistant-pfp.webp"}
+                    width={300}
+                    height={300}
+                    alt="assistant-pfp"
+                    className="rounded-full aspect-square w-10"
+                  />
+                  <span className="font-semibold bg-light">
+                    Travel Assistant
+                    <div className="text-green-500 font-semibold flex gap-2 items-center">
+                      <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                      <span className="text-sm">Online</span>
+                    </div>
+                  </span>
+                </div>
               </div>
             </div>
-            <div className="max-chat-screen-height overflow-y-auto border-gray-300 ">
-              <div className="flex flex-col items-center">
-                <div className="mb-24 mt-12 flex flex-col items-start gap-y-4">
-                  <div className="rounded-2xl bg-gray-200 max-w-[85%] p-4 mb-2">
-                    Here we are again, what are we chatting about today? Ask me
-                    literally anything related to travel.
+            <div className="relative overflow-x-hidden overflow-y-auto border-gray-300 chat-window-h">
+              <div className="flex flex-col items-center relative">
+                <div className="mb-12 mt-12 flex flex-col items-start gap-y-4 chat-layout-container">
+                  <div className="rounded-2xl rounded-tl-none bg-gray-200  max-w-[80%] md:max-w-[75%] p-4 mb-2">
+                    Ask me anything.
                   </div>
-                  <div className="rounded-2xl bg-light-primary text-white  max-w-[90%] p-4 self-end">
-                    Inspire me where to go
-                  </div>
-                  <div className="rounded-2xl bg-gray-200 max-w-[85%] p-4 mb-2">
-                    Here we are again, what are we chatting about today? Ask me
-                    literally anything related to travel.
-                  </div>
-                  <div className="rounded-2xl bg-light-primary text-white  max-w-[90%] p-4 self-end">
-                    Inspire me where to go
-                  </div>
-                  <div className="rounded-2xl bg-gray-200 max-w-[85%] p-4 mb-2">
-                    Here we are again, what are we chatting about today? Ask me
-                    literally anything related to travel.
-                  </div>
-                  <div className="rounded-2xl bg-light-primary text-white  max-w-[90%] p-4 self-end">
-                    Inspire me where to go
-                  </div>
-                  <div className="rounded-2xl bg-gray-200 max-w-[85%] p-4 mb-2">
-                    Here we are again, what are we chatting about today? Ask me
-                    literally anything related to travel.
-                  </div>
-                  <div className="rounded-2xl bg-light-primary text-white  max-w-[90%] p-4 self-end">
-                    Inspire me where to go
-                  </div>
-                  <div className="rounded-2xl bg-gray-200 max-w-[85%] p-4 mb-2">
-                    Here we are again, what are we chatting about today? Ask me
-                    literally anything related to travel.
-                  </div>
-                  <div className="rounded-2xl bg-light-primary text-white  max-w-[90%] p-4 self-end">
-                    Inspire me where to go
-                  </div>
-                  <div className="rounded-2xl bg-gray-200 max-w-[85%] p-4 mb-2">
-                    Here we are again, what are we chatting about today? Ask me
-                    literally anything related to travel.
-                  </div>
-                  <div className="rounded-2xl bg-light-primary text-white  max-w-[90%] p-4 self-end">
-                    Inspire me where to go
-                  </div>
-                  <div className="rounded-2xl bg-gray-200 max-w-[85%] p-4 mb-2">
-                    Here we are again, what are we chatting about today? Ask me
-                    literally anything related to travel.
-                  </div>
-                  <div className="rounded-2xl bg-light-primary text-white  max-w-[90%] p-4 self-end">
-                    Inspire me where to go
-                  </div>
-                </div>
-                <div className="chat-layout-container bg-light-background fixed bottom-0">
-                  <div className="flex justify-center gap-2 flex-col py-3">
-                    <div className="flex gap-2 justify-center">
-                      <input
-                        type="text"
-                        placeholder="Got any travel-related questions? Feel free to ask."
-                        className="caret-light-primary bg-light-box_bg focus:outline-none border-2 border-gray-200 py-3.5 rounded-full px-4 w-full"
-                        onChange={(e) => setChatMessage(e.target.value)}
-                      />
-                      <button
-                        className={`bg-light-primary p-4 aspect-square rounded-full flex justify-center items-center transition-all duration-200 ease-linear`}
-                      >
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="#fff"
-                          width="20px"
-                          version="1.1"
-                          id="Layer_1"
-                          viewBox="0 0 512 512"
-                        >
-                          <g>
-                            <g>
-                              <path d="M508.645,18.449c-2.929-2.704-7.133-3.51-10.826-2.085L6.715,204.446c-3.541,1.356-6.066,4.515-6.607,8.264    c-0.541,3.75,0.985,7.496,3.995,9.796l152.127,116.747c-0.004,0.116-0.575,0.224-0.575,0.342v83.592    c0,3.851,2.663,7.393,6.061,9.213c1.541,0.827,3.51,1.236,5.199,1.236c2.026,0,4.181-0.593,5.931-1.756l56.12-37.367    l130.369,99.669c1.848,1.413,4.099,2.149,6.365,2.149c1.087,0,2.186-0.169,3.248-0.516c3.27-1.066,5.811-3.672,6.786-6.974    L511.571,29.082C512.698,25.271,511.563,21.148,508.645,18.449z M170.506,321.508c-0.385,0.36-0.7,0.763-1.019,1.163    L31.659,217.272L456.525,54.557L170.506,321.508z M176.552,403.661v-48.454l33.852,25.887L176.552,403.661z M359.996,468.354    l-121.63-93.012c-1.263-1.77-2.975-3.029-4.883-3.733l-47.29-36.163L480.392,60.86L359.996,468.354z" />
-                            </g>
-                          </g>
-                        </svg>
-                      </button>
+                  {messageCollection.map((message, index) => (
+                    <div
+                      className={`rounded-2xl max-w-[90%] md:max-w-[75%] animate__animated animate__fadeIn  p-4 ${
+                        message.role === "user"
+                          ? "self-end bg-light-primary_bg rounded-tr-none text-white font max-w-[55%]"
+                          : "rounded-tl-none bg-gray-200 max-w-[75%]"
+                      }`}
+                      key={index}
+                    >
+                      {message.content}
                     </div>
-                  </div>
+                  ))}
                 </div>
+              </div>
+              <div ref={ref} />
+            </div>
+            <div className="bg-light-background ">
+              <div className="flex justify-center gap-2 flex-col md:py-3">
+                <form
+                  className="flex gap-2 justify-center chat-layout-container"
+                  onSubmit={submitMessageHandler}
+                >
+                  <input
+                    type="text"
+                    placeholder="Got any travel-related questions? Feel free to ask."
+                    className="caret-light-primary bg-light-box_bg focus:outline-none border-2 border-gray-200 py-1 md:py-3.5 rounded-full px-4 w-full"
+                    onChange={(e) => setChatMessage(e.target.value)}
+                    value={chatMessage}
+                  />
+                  <button
+                    type="submit"
+                    className={`bg-light-primary p-4 aspect-square rounded-full flex justify-center items-center transition-all duration-200 ease-linear`}
+                    disabled={chatMessage.length < 1}
+                  >
+                    <AirplaneIcon />
+                  </button>
+                </form>
               </div>
             </div>
           </div>
-          <div className="md:w-1/3">recommendations here</div>
+          <div className="hidden md:block md:w-1/3">recommendations here</div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
