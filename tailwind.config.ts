@@ -16,10 +16,14 @@ const config: Config = {
       colors: {
         light: {
           background: "#F5F7FB",
-          box_bg: "#FFFFFF",
-          primary: "#00AA6C",
+          box_bg: "#ffff",
+          card_bg: "#F0F4F9", 
+          primary: "#008DC0",
           primary_bg: "#00A858",
           text_primary: "#212121",
+          grey: "#E4EBF3",
+          border_lighter: "rgba(0, 0, 0, 0.1)",
+          border: "#939497",
         },
       },
       borderRadius: {
@@ -28,6 +32,7 @@ const config: Config = {
       fontFamily: {
         raleway: ["Raleway", "sans-serif"],
         poppins: ["Poppins", "sans-serif"],
+        noto: ["Noto Sans", "sans-serif"],
       },
     },
   },
