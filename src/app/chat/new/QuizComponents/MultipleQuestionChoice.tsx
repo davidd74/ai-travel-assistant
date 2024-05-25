@@ -14,7 +14,7 @@ type Props = {
   inputValue?: string;
 };
 
-const SingleChoiceQuestion = (props: Props) => {
+const MultipleChoiceQuestion = (props: Props) => {
   const [questionValue, setQuestionValue] = React.useState<string>("");
 
   return (
@@ -49,4 +49,4 @@ const SingleChoiceQuestion = (props: Props) => {
   );
 };
 
-export default SingleChoiceQuestion;
+export default MultipleChoiceQuestion;

@@ -1,13 +1,9 @@
 import React from "react";
 import QuizProgressBar from "./QuizProgressBar";
 
-import SearchIcon from "@/public/icons/SearchIcon";
 import Destination from "./QuizComponents/Destination";
-import SingleChoiceQuestion from "./QuizComponents/SingleChoiceQuestion";
 import Date from "./QuizComponents/Date";
 import Goers from "./QuizComponents/Goers";
-
-const questionComponents = [];
 
 const Quiz = () => {
   return (

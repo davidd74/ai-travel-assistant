@@ -11,6 +11,10 @@ body {
   @apply bg-light-background;
 }
 
+.layout-container {
+  @apply max-w-screen-2xl mx-auto w-full;
+}
+
 .animate__animated.animate__fadeIn {
   --animate-duration: 450ms;
 }
