@@ -4,6 +4,7 @@ import QuizProgressBar from "./QuizProgressBar";
 import Destination from "./QuizComponents/Destination";
 import Date from "./QuizComponents/Date";
 import Goers from "./QuizComponents/Goers";
+import Activities from "./QuizComponents/Activities";
 
 const Quiz = () => {
   return (
@@ -13,6 +14,7 @@ const Quiz = () => {
         <Destination />
         <Date />
         <Goers />
+        <Activities />
       </div>
     </div>
   );

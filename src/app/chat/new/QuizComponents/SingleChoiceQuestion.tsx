@@ -22,7 +22,10 @@ const SingleChoiceQuestion = (props: Props) => {
       {props.items.map((item, index) => (
         <div
           key={index}
-          className={`pb-2 w-full bg-light-card_bg border-[3px] overflow-hidden hover:border-light-primary transition-all duration-300 ease-linear rounded-[13px] cursor-pointer ${
+          className={`
+          max-w-[300px]
+          
+          pb-2 w-full bg-light-card_bg border-[3px] overflow-hidden hover:border-light-primary transition-all duration-300 ease-linear rounded-[13px] cursor-pointer ${
             questionValue === item.title &&
             (props.inputValue === undefined || props.inputValue === item.title)
               ? "border-light-primary"
@@ -35,8 +38,8 @@ const SingleChoiceQuestion = (props: Props) => {
         >
           <Image
             src={item.src as string}
-            width={450}
-            height={450}
+            width={300}
+            height={300}
             alt="destination"
           />
           <h3 className="ml-2 mr-2 mt-2 text-lg">{item.title}</h3>
