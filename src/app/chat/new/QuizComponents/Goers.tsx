@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import SingleChoiceQuestion from "./SingleChoiceQuestion";
+import SingleChoiceQuestion from "./ChoiceQuestion";
 import { goersData } from "src/data/goersData";
 
 const Goers = () => {
@@ -18,6 +18,7 @@ const Goers = () => {
       <h2 className="pt-16 pb-6 text-2xl">How many people are going?</h2>
       <SingleChoiceQuestion
         handleSelection={handleGoersSelection}
+        questionValue={goersDataValue}
         items={goersData}
       />
     </>

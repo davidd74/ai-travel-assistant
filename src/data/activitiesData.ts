@@ -1,7 +1,7 @@
 export const activitiesData = [
   {
-    title: "Sights",
-    src: "/images/activities.png",
+    title: "Culture",
+    src: "/images/activities/sights.png",
   },
   {
     title: "Nature",

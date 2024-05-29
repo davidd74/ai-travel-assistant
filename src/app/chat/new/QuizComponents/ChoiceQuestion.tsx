@@ -1,4 +1,3 @@
-// SingleChoiceQuestion.tsx
 import Image from "next/image";
 import React from "react";
 
@@ -12,11 +11,10 @@ type Props = {
   items: Item[];
   handleSelection: (title: string) => void;
   inputValue?: string;
+  questionValue?: string;
 };
 
-const SingleChoiceQuestion = (props: Props) => {
-  const [questionValue, setQuestionValue] = React.useState<string>("");
-
+const ChoiceQuestion = (props: Props) => {
   return (
     <div className="grid grid-cols-4 gap-4">
       {props.items.map((item, index) => (
@@ -26,14 +24,13 @@ const SingleChoiceQuestion = (props: Props) => {
           max-w-[300px]
           
           pb-2 w-full bg-light-card_bg border-[3px] overflow-hidden hover:border-light-primary transition-all duration-300 ease-linear rounded-[13px] cursor-pointer ${
-            questionValue === item.title &&
+            props.questionValue === item.title &&
             (props.inputValue === undefined || props.inputValue === item.title)
               ? "border-light-primary"
               : "border-transparent"
           }`}
           onClick={() => {
             props.handleSelection(item.title);
-            setQuestionValue(item.title);
           }}
         >
           <Image
@@ -52,4 +49,4 @@ const SingleChoiceQuestion = (props: Props) => {
   );
 };
 
-export default SingleChoiceQuestion;
+export default ChoiceQuestion;

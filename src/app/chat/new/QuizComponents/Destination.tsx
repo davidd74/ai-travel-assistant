@@ -2,7 +2,7 @@
 import SearchIcon from "@/public/icons/SearchIcon";
 import React, { useEffect, useState } from "react";
 import { destinationData } from "src/data/destinationData";
-import SingleChoiceQuestion from "./SingleChoiceQuestion";
+import SingleChoiceQuestion from "./ChoiceQuestion";
 
 const Destination = () => {
   const [destinationValue, setDestinationValue] = useState<string>("");
@@ -37,6 +37,7 @@ const Destination = () => {
           items={destinationData}
           handleSelection={handleDestinationSelection}
           inputValue={destinationValue}
+          questionValue={destinationValue}
         />
       </div>
     </>

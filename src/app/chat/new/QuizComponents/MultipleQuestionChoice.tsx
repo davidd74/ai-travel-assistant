@@ -11,38 +11,35 @@ interface Item {
 type Props = {
   items: Item[];
   handleSelection: (title: string) => void;
-  inputValue?: string;
+  questionValue: string[];
 };
 
 const MultipleChoiceQuestion = (props: Props) => {
-  const [questionValue, setQuestionValue] = React.useState<string>("");
-
   return (
-    <div className="grid grid-cols-4 gap-4">
+    <div className="grid grid-cols-3 gap-x-8 gap-y-4">
       {props.items.map((item, index) => (
         <div
           key={index}
-          className={`pb-2 w-full bg-light-card_bg border-[3px] overflow-hidden hover:border-light-primary transition-all duration-300 ease-linear rounded-[13px] cursor-pointer ${
-            questionValue === item.title &&
-            (props.inputValue === undefined || props.inputValue === item.title)
+          className={`
+          max-w-[275px]
+          pb-2 w-full bg-light-card_bg border-[3px] overflow-hidden  transition-all duration-200 ease-linear rounded-[20px] cursor-pointer ${
+            props.questionValue?.includes(item.title)
               ? "border-light-primary"
               : "border-transparent"
           }`}
           onClick={() => {
             props.handleSelection(item.title);
-            setQuestionValue(item.title);
           }}
         >
           <Image
             src={item.src as string}
-            width={450}
-            height={450}
-            alt="destination"
+            width={275}
+            height={275}
+            alt="activity"
+            quality={100}
+            priority
           />
-          <h3 className="ml-2 mr-2 mt-2 text-lg">{item.title}</h3>
-          <p className="ml-2 mr-2 mt-1 text-sm font-normal">
-            {item.description}
-          </p>
+          <h3 className="ml-2 mt-2 text-md font-semibold">{item.title}</h3>
         </div>
       ))}
     </div>

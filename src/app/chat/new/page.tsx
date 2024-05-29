@@ -83,7 +83,7 @@ const Page = () => {
   }, [messageCollection.length]);
 
   return (
-    <div className="font-noto font-bold max-h-screen flex">
+    <div className="font-noto font-bold flex">
       <ChatSidebar />
       <ChatWindow />
     </div>
