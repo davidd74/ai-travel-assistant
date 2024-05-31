@@ -1,4 +1,6 @@
-import {nextui} from '@nextui-org/theme';
+// tailwind.config.ts
+const { nextui } = require("@nextui-org/react");
+
 import type { Config } from "tailwindcss";
 
 const config: Config = {
@@ -6,7 +8,7 @@ const config: Config = {
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
-    "./node_modules/@nextui-org/theme/dist/components/(calendar|button|ripple|spinner).js"
+    "./node_modules/@nextui-org/theme/dist/components/(calendar|button|ripple|spinner|slider).js",
   ],
   theme: {
     extend: {
@@ -19,7 +21,7 @@ const config: Config = {
         light: {
           background: "#F5F7FB",
           box_bg: "#ffff",
-          card_bg: "#F0F4F9", 
+          card_bg: "#F0F4F9",
           primary: "#008DC0",
           primary_bg: "#00A858",
           text_primary: "#212121",
@@ -38,6 +40,21 @@ const config: Config = {
       },
     },
   },
-  plugins: [nextui()],
+  plugins: [
+    nextui({
+      themes: {
+        light: {
+          colors: {
+            primary: {
+              DEFAULT: "#008DC0",
+            },
+          },
+        },
+        dark: {
+          colors: {},
+        },
+      },
+    }),
+  ],
 };
 export default config;

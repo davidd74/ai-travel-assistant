@@ -18,6 +18,11 @@ const Quiz = () => {
         <Activities />
         <Budget />
       </div>
+      <div className="w-full pb-6 flex justify-center">
+        <button className="font-medium rounded-[8px] transition-all duration-200 ease-linear hover:bg-light-primary/80 px-4 py-3 bg-light-primary text-white">
+          Create itinerary
+        </button>
+      </div>
     </div>
   );
 };

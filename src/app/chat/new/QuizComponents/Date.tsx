@@ -57,7 +57,7 @@ const SelectDate = () => {
   return (
     <>
       <h2 className="pt-16 text-2xl">When are you traveling?</h2>
-      <div className="flex flex-col">
+      <div className="flex relative flex-col">
         <div
           onClick={() => setShowCalendar(!showCalendar)}
           className="w-[256px] cursor-pointer flex items-center mt-6 gap-2 p-2 border-2 border-light-border_lighter rounded-[8px]"
@@ -74,7 +74,7 @@ const SelectDate = () => {
             )}
           </p>
         </div>
-        <div className="mt-2">
+        <div className="mt-2 absolute top-[100%]">
           {showCalendar && (
             <RangeCalendar
               aria-label="Date (Min Date Value)"
@@ -88,15 +88,6 @@ const SelectDate = () => {
           )}
         </div>
       </div>
-
-      <Slider
-        label="Temperature"
-        step={0.01}
-        maxValue={1}
-        minValue={0}
-        defaultValue={0.4}
-        className="max-w-md"
-      />
     </>
   );
 };

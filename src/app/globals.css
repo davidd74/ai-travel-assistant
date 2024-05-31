@@ -32,3 +32,8 @@ body {
 .button-fn:hover {
   border-color: rgba(11, 47, 97, 0.47);
 }
+
+.custom-tooltip {
+  padding: 0.35rem;
+  @apply bg-light-primary;
+}
