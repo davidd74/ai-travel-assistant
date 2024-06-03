@@ -18,11 +18,11 @@ const Destination = () => {
 
   return (
     <>
-      <h2 className="pt-16 text-3xl">Plan your next trip</h2>
-      <form className="flex relative w-1/2 mt-8 flex-col">
+      <h2 className="lg:pt-16 text-lg md:text-3xl">Plan your next trip</h2>
+      <form className="flex relative w-full lg:w-1/2 mt-8 flex-col">
         <input
           autoFocus
-          placeholder="Where do you wanna go?"
+          placeholder="Where do you want to go?"
           type="text"
           className="caret-light-primary border-2 outline-none pl-10 border-light-border_lighter py-3.5 w-full rounded-[50px] font-normal text-md"
           value={destinationValue}

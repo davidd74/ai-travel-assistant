@@ -22,7 +22,9 @@ const Activities = () => {
 
   return (
     <>
-      <h2 className="pt-16 pb-6 text-2xl">Choose activities for your trip</h2>
+      <h2 className="pt-16 pb-6 text-center text-lg  md:text-2xl">
+        Choose activities for your trip
+      </h2>
 
       <MultipleChoiceQuestion
         questionValue={questionValue}

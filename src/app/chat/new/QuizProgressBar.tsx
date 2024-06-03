@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Quiz from "./Quiz";
 import IslandIcon from "@/public/icons/IslandIcon";
 import DateIcon from "@/public/icons/DateIcon";
@@ -33,11 +33,11 @@ const QuizProgressBar = (props: QuizProgressBarProps) => {
   console.log(props.quizProgress);
 
   return (
-    <div className="flex">
+    <div className="hidden md:flex">
       {divsArray.map((_, index) => (
         <div className="flex" key={index}>
           <div
-            className={`border-[2px] flex items-center justify-center aspect-square  w-14 rounded-full overflow-visible
+            className={`border-[2px] flex items-center justify-center aspect-square w-10 md:w-14 rounded-full overflow-visible
                 z-10 relative
               ${
                 (props.quizProgress as number) >= index + 1
@@ -53,13 +53,12 @@ const QuizProgressBar = (props: QuizProgressBarProps) => {
             {getIcon(index)}
           </div>
           <svg
-            width="50"
             height="40"
             viewBox="0 0 50 20"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
             className={`
-        transition-all duration-300 ease-linear
+        transition-all duration-30 w-[50px]  ease-linear
         ${index + 1 === 4 ? "hidden" : ""}
         ${index + 1 === 1 ? "translate-x-[-2px]" : ""}
         ${index + 1 === 2 ? "translate-x-[-5px]" : ""}

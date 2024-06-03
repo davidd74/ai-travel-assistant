@@ -35,5 +35,9 @@ body {
 
 .custom-tooltip {
   padding: 0.35rem;
-  @apply bg-light-primary;
+  @apply bg-light-primary text-lg;
+}
+
+.app-wrapper {
+  width: calc(100% - 100px);
 }

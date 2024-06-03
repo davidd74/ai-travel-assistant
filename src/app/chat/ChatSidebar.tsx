@@ -4,7 +4,7 @@ import React from "react";
 
 const ChatSidebar = () => {
   return (
-    <div className="pt-6 flex flex-col justify-start items-center w-fit px-4 h-screen fixed -left-0 gap-y-6 bg-light-grey">
+    <div className="hidden md:flex pt-6 flex-col w-16 justify-start items-center h-screen fixed -left-0 gap-y-6 bg-light-grey">
       <HamburgerIcon />
       <NewChatIcon />
     </div>

@@ -9,7 +9,7 @@ import Budget from "./QuizComponents/Budget";
 
 const Quiz = () => {
   return (
-    <div className="bg-light-background px-12 flex flex-col items-start justify-start pt-12 w-full">
+    <div className="bg-light-background md:px-12 flex flex-col items-start justify-start pt-12 w-full">
       <div className="flex w-full justify-center items-center flex-col">
         <QuizProgressBar quizProgress={1} />
         <Destination />
