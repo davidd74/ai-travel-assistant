@@ -5,14 +5,13 @@
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
-
 body {
   @apply text-light-text_primary;
   @apply bg-light-background;
 }
 
 .layout-container {
-  @apply max-w-screen-2xl mx-auto w-full;
+  @apply max-w-screen-2xl mx-auto w-full px-4;
 }
 
 .animate__animated.animate__fadeIn {
@@ -34,10 +33,17 @@ body {
 }
 
 .custom-tooltip {
-  padding: 0.35rem;
-  @apply bg-light-primary text-lg;
+  padding: 0.5rem;
+  @apply bg-light-primary;
+  font-size: 1rem;
 }
 
 .app-wrapper {
   width: calc(100% - 100px);
+}
+
+@media (max-width: 768px) {
+  .app-wrapper {
+    width: 100%;
+  }
 }

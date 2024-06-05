@@ -1,38 +1,38 @@
-// Destination.tsx
 import SearchIcon from "@/public/icons/SearchIcon";
 import React, { useEffect, useState } from "react";
 import { destinationData } from "src/data/destinationData";
 import SingleChoiceQuestion from "./ChoiceQuestion";
+import H2Heading from "src/app/ElementComponents/H2Heading";
+import { HandleAnswerType } from "src/data/types";
 
-const Destination = () => {
+const Destination = ({ handleAnswer }: { handleAnswer: HandleAnswerType }) => {
   const [destinationValue, setDestinationValue] = useState<string>("");
 
-  // Handler function to update the selected destination value
   const handleDestinationSelection = (selectedDestination: string) => {
     setDestinationValue(selectedDestination);
-  };
 
-  useEffect(() => {
-    console.log(destinationValue);
-  }, [destinationValue]);
+    handleAnswer("destination", selectedDestination);
+  };
 
   return (
     <>
-      <h2 className="lg:pt-16 text-lg md:text-3xl">Plan your next trip</h2>
-      <form className="flex relative w-full lg:w-1/2 mt-8 flex-col">
+      <H2Heading text="Plan your next trip" />
+      <form className="flex relative w-4/5 md:w-2/3 lg:w-1/2 mt-4 md:mt-8 flex-col">
         <input
           autoFocus
-          placeholder="Where do you want to go?"
+          placeholder="Where to?"
           type="text"
-          className="caret-light-primary border-2 outline-none pl-10 border-light-border_lighter py-3.5 w-full rounded-[50px] font-normal text-md"
+          className="caret-light-primary border-2 outline-none pl-10 border-light-border_lighter py-2.5 md:py-3.5 w-full rounded-[30px] font-normal text-md"
           value={destinationValue}
-          onChange={(e) => setDestinationValue(e.target.value)}
+          onChange={(e) => {
+            setDestinationValue(e.target.value);
+          }}
         ></input>
         <button>
           <SearchIcon className="cursor-pointer absolute left-2.5 top-1/2 translate-y-[-45%]" />
         </button>
       </form>
-      <div className="flex gap-10 mt-10">
+      <div className={`flex gap-10 md:mt-10`}>
         <SingleChoiceQuestion
           items={destinationData}
           handleSelection={handleDestinationSelection}

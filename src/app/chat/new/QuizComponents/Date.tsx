@@ -2,9 +2,11 @@ import React, { useEffect } from "react";
 import { RangeCalendar } from "@nextui-org/calendar";
 import { today, getLocalTimeZone, parseDate } from "@internationalized/date";
 import DateCircle from "@/public/icons/DateCircle";
-import { Slider } from "@nextui-org/react";
+import H3Heading from "src/app/ElementComponents/H3Heading";
+import { HandleAnswerType } from "src/data/types";
+import toast from "react-hot-toast";
 
-const SelectDate = () => {
+const SelectDate = ({ handleAnswer }: { handleAnswer: HandleAnswerType }) => {
   const [selectedRange, setSelectedRange] = React.useState<any>([]);
   const [showCalendar, setShowCalendar] = React.useState<boolean>(false);
 
@@ -45,7 +47,33 @@ const SelectDate = () => {
   };
 
   const handleSelectedRange = (range: any) => {
-    setSelectedRange(range);
+    const start = new Date(
+      range.start.year,
+      range.start.month - 1,
+      range.start.day
+    );
+    let end = new Date(range.end.year, range.end.month - 1, range.end.day);
+    const diffDays = Math.ceil(
+      (end.getTime() - start.getTime()) / (1000 * 60 * 60 * 24)
+    );
+
+    if (diffDays < 2) {
+      end = new Date(start.getTime());
+      end.setDate(start.getDate() + 2);
+      toast.error("Select at least 2 days");
+    } else if (diffDays > 7) {
+      end = new Date(start.getTime());
+      end.setDate(start.getDate() + 7);
+      toast.error("You can't select more than 7 days");
+    }
+
+    const newRange = {
+      start: range.start,
+      end: parseDate(end.toISOString().split("T")[0]),
+    };
+
+    setSelectedRange(newRange);
+    handleAnswer("date", newRange);
   };
 
   useEffect(() => {
@@ -56,14 +84,15 @@ const SelectDate = () => {
 
   return (
     <>
-      <h2 className="pt-16 text-lg md:text-2xl">When are you traveling?</h2>
+      <H3Heading text="When are you traveling?" />
+
       <div className="flex relative flex-col">
         <div
           onClick={() => setShowCalendar(!showCalendar)}
           className="w-[256px] cursor-pointer flex items-center mt-2 md:mt-6 gap-2 p-2 border-2 border-light-border_lighter rounded-[8px]"
         >
           <DateCircle />
-          <p>
+          <p className="text-base font-medium">
             {selectedRange.start && selectedRange.end ? (
               <span>
                 {formatDate(selectedRange.start)} -{" "}
@@ -79,7 +108,6 @@ const SelectDate = () => {
             <RangeCalendar
               aria-label="Date (Min Date Value)"
               minValue={currentDate}
-              maxValue={maxDate}
               onChange={handleSelectedRange}
               value={
                 selectedRange.start && selectedRange.end ? selectedRange : null

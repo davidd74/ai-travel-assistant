@@ -1,9 +1,10 @@
 import React, { useEffect, useLayoutEffect } from "react";
 import MultipleChoiceQuestion from "./MultipleQuestionChoice";
 import { activitiesData } from "src/data/activitiesData";
-import ChoiceQuestion from "./ChoiceQuestion";
+import H3Heading from "src/app/ElementComponents/H3Heading";
+import { HandleAnswerType } from "src/data/types";
 
-const Activities = () => {
+const Activities = ({ handleAnswer }: { handleAnswer: HandleAnswerType }) => {
   const [questionValue, setQuestionValue] = React.useState<string[]>([]);
 
   const handleMultipleSelection = (title: string) => {
@@ -17,14 +18,12 @@ const Activities = () => {
   };
 
   useEffect(() => {
-    console.log(questionValue);
+    handleAnswer("activities", questionValue);
   }, [questionValue]);
 
   return (
     <>
-      <h2 className="pt-16 pb-6 text-center text-lg  md:text-2xl">
-        Choose activities for your trip
-      </h2>
+      <H3Heading text="Choose trip activities" />
 
       <MultipleChoiceQuestion
         questionValue={questionValue}
