@@ -28,7 +28,7 @@ const config: Config = {
           text_primary: "#212121",
           grey: "#E4EBF3",
           border_lighter: "rgba(0, 0, 0, 0.1)",
-          border: "#939497",
+          border: "#A39393",
         },
       },
       borderRadius: {

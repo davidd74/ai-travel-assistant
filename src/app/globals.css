@@ -43,7 +43,15 @@ body {
 }
 
 .chat-wrapper {
-  width: calc(100% - 100px);
+  width: calc(100% - 64px);
+}
+
+.chat-height {
+  height: calc(100vh - 117px);
+  overflow: auto;
+}
+.chat-width {
+  width: calc(100% - 64px);
 }
 
 @media (max-width: 768px) {
