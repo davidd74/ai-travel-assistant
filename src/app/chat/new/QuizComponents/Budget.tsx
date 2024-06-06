@@ -24,14 +24,7 @@ const Budget = ({ handleAnswer }: { handleAnswer: HandleAnswerType }) => {
           maximumFractionDigits: 0,
         })}`}
       />
-      {/* <p className="mt-4 text-xl font-medium">
-        {budget.toLocaleString("en-US", {
-          style: "currency",
-          currency: "USD",
-          minimumFractionDigits: 0,
-          maximumFractionDigits: 0,
-        })}
-      </p> */}
+
       <Slider
         aria-label="Budget"
         showTooltip={true}
@@ -43,11 +36,11 @@ const Budget = ({ handleAnswer }: { handleAnswer: HandleAnswerType }) => {
         defaultValue={200}
         className="max-w-md mt-6"
         classNames={{
-          filler: "bg-light-primary",
-          thumb: "bg-light-primary",
-          startContent: "bg-light-primary",
-          step: "bg-light-primary",
-          mark: "bg-light-primary",
+          filler: "bg-light-primary_darker",
+          thumb: "bg-light-primary_darker",
+          startContent: "bg-light-primary_darker",
+          step: "bg-light-primary_darker",
+          mark: "bg-light-primary_darker",
         }}
         onChange={handleBudgetChange}
       />

@@ -8,7 +8,7 @@ const config: Config = {
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
-    "./node_modules/@nextui-org/theme/dist/components/(calendar|button|ripple|spinner|slider).js",
+    "./node_modules/@nextui-org/theme/dist/components/(calendar|button|slider|textarea).js",
   ],
   theme: {
     extend: {
@@ -21,6 +21,7 @@ const config: Config = {
         light: {
           background: "#F5F7FB",
           box_bg: "#ffff",
+          primary_darker: "#1A1E3A",
           card_bg: "#F0F4F9",
           primary: "#008DC0",
           primary_bg: "#00A858",
@@ -46,7 +47,7 @@ const config: Config = {
         light: {
           colors: {
             primary: {
-              DEFAULT: "#008DC0",
+              DEFAULT: "#1A1E3A",
             },
           },
         },

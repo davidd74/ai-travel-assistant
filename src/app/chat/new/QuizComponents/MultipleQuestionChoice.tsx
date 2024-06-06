@@ -23,7 +23,7 @@ const MultipleChoiceQuestion = (props: Props) => {
           className={`
           max-w-[275px]
 
-          pb-2 w-full bg-light-card_bg border-[3px] overflow-hidden  transition-all duration-200 ease-linear rounded-[10px] cursor-pointer ${
+          pb-2 w-full bg-light-card_bg border-[3px] overflow-hidden  transition-all duration-200 ease-linear rounded-t-[18px] rounded-b-[10px] cursor-pointer ${
             props.questionValue?.includes(item.title)
               ? "border-light-primary"
               : "border-transparent"

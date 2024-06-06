@@ -9,7 +9,8 @@ import "animate.css";
 import NewChatIcon from "@/public/icons/NewChatIcon";
 import HamburgerIcon from "@/public/icons/HamburgerIcon";
 import ChatSidebar from "../ChatSidebar";
-import ChatWindow from "../ChatWindow";
+import ChatWindow from "../[id]/ChatWindow";
+import Quiz from "./Quiz";
 
 const Page = () => {
   const [chatMessage, setChatMessage] = React.useState("");
@@ -85,7 +86,8 @@ const Page = () => {
   return (
     <div className="font-noto font-bold flex">
       <ChatSidebar />
-      <ChatWindow />
+      <Quiz />
+      {/* <ChatWindow /> */}
     </div>
   );
 };
