@@ -61,7 +61,7 @@ const SelectDate = ({ handleAnswer }: { handleAnswer: HandleAnswerType }) => {
       end = new Date(start.getTime());
       end.setDate(start.getDate() + 2);
       toast.error("Select at least 2 days");
-    } else if (diffDays > 7) {
+    } else if (diffDays >= 7) {
       end = new Date(start.getTime());
       end.setDate(start.getDate() + 7);
       toast.error("You can't select more than 7 days");

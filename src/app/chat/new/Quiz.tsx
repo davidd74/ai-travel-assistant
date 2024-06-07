@@ -8,6 +8,8 @@ import Activities from "./QuizComponents/Activities";
 import Budget from "./QuizComponents/Budget";
 import { button } from "@nextui-org/theme";
 import toast, { Toaster } from "react-hot-toast";
+import { useRouter } from "next/navigation";
+
 
 type AnswersType = {
   destination: string;
@@ -20,6 +22,8 @@ type AnswersType = {
 type HandleAnswerType = (question: keyof AnswersType, answer: any) => void;
 
 const Quiz: React.FC = () => {
+  const router = useRouter();
+
   const [answers, setAnswers] = useState<AnswersType>({
     destination: "",
     date: {
@@ -46,7 +50,7 @@ const Quiz: React.FC = () => {
       toast.error("Please answer all the questions");
     } else {
       toast.success("Itinerary created successfully");
-      console.log(answers);
+      router.push("/chat/12");
     }
   };
 
