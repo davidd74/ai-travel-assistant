@@ -38,8 +38,8 @@ body {
   font-size: 1rem;
 }
 
-.app-wrapper {
-  width: calc(100% - 100px);
+.quiz-wrapper {
+  width: calc(100% - 64px);
 }
 
 .chat-wrapper {
@@ -52,12 +52,6 @@ body {
 }
 .chat-width {
   width: calc(100% - 64px);
-}
-
-@media (max-width: 768px) {
-  .app-wrapper {
-    width: 100%;
-  }
 }
 
 @media (max-width: 768px) {
@@ -87,4 +81,13 @@ body {
 
 .chat-textarea::-webkit-scrollbar-button {
   display: none;
+}
+
+.text-foreground {
+  text-align: center;
+}
+
+.text-small {
+  text-align: center;
+  padding-top: 5px;
 }

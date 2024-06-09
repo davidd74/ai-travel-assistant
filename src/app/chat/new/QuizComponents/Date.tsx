@@ -89,10 +89,10 @@ const SelectDate = ({ handleAnswer }: { handleAnswer: HandleAnswerType }) => {
       <div className="flex relative flex-col">
         <div
           onClick={() => setShowCalendar(!showCalendar)}
-          className="w-[256px] cursor-pointer flex items-center mt-2 md:mt-6 gap-2 p-2 border-2 border-light-border_lighter rounded-[8px]"
+          className="bg-white w-[256px] cursor-pointer flex items-center mt-2 md:mt-6 gap-2 p-2 border-2 border-light-border_lighter rounded-[8px]"
         >
           <DateCircle />
-          <p className="text-base font-medium">
+          <p className="text-base font-medium ">
             {selectedRange.start && selectedRange.end ? (
               <span>
                 {formatDate(selectedRange.start)} -{" "}

@@ -84,10 +84,9 @@ const Page = () => {
   }, [messageCollection.length]);
 
   return (
-    <div className="font-noto font-bold flex">
+    <div className="font-noto font-bold flex justify-center">
       <ChatSidebar />
       <Quiz />
-      {/* <ChatWindow /> */}
     </div>
   );
 };

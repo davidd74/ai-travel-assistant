@@ -16,7 +16,7 @@ type Props = {
 
 const ChoiceQuestion = (props: Props) => {
   return (
-    <div className="pt-6 grid grid-cols-2 md:grid-cols-4 gap-4">
+    <div className="pt-6 grid grid-cols-2 md:grid-cols-4 gap-x-6">
       {props.items.map((item, index) => (
         <div
           key={index}
@@ -39,7 +39,7 @@ const ChoiceQuestion = (props: Props) => {
             height={300}
             alt="destination"
           />
-          <h3 className="ml-2 mr-2 mt-2 text-base font-semibold sm:text-lg">
+          <h3 className="ml-2 mr-2 mt-2 text-base font-semibold lg:text-lg">
             {item.title}
           </h3>
           <p className="ml-2 mr-2 mt-1 text-sm font-normal">

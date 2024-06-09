@@ -10,7 +10,6 @@ import { button } from "@nextui-org/theme";
 import toast, { Toaster } from "react-hot-toast";
 import { useRouter } from "next/navigation";
 
-
 type AnswersType = {
   destination: string;
   date: {};
@@ -59,7 +58,7 @@ const Quiz: React.FC = () => {
   }, [answers]);
 
   return (
-    <div className="bg-light-background md:px-12 flex flex-col items-start justify-start lg:pt-12 w-full">
+    <div className="bg-light-background quiz-wrapper md:px-12 flex flex-col items-start justify-start lg:pt-12 ml-[32px]">
       <Toaster position="top-right" />
 
       <div className="flex w-full justify-center items-center flex-col">
