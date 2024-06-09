@@ -40,7 +40,7 @@ const MultipleChoiceQuestion = (props: Props) => {
             quality={100}
             priority
           />
-          <h3 className="ml-2 mt-2 text-sm md:text-md lg:text-lg font-semibold">
+          <h3 className="ml-2 mt-2 text-base lg:text-lg font-semibold">
             {item.title}
           </h3>
         </div>

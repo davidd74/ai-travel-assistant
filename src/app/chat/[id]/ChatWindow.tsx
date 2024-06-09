@@ -25,32 +25,70 @@ const ChatWindow = () => {
   }, []);
 
   return (
-    <div className="w-3/5 pt-7 pb-4 px-8   relative flex flex-col h-screen items-center">
-      <div className="ml-[64px]   chat-height chat-width">
-        <div className="w-2/5 flex-col">
+    <div className="w-full pt-15 pt-12 pb-4 pl-12 relative flex flex-col h-screen items-center">
+      <div className="ml-[64px] chat-height chat-width">
+        {/* itinerary card */}
+        <div className=" w-3/5 flex gap-3">
           <Image
-            src={"/images/tapestry.jpg"}
-            width={600}
-            height={600}
-            alt="Cultural Tapestry of Spain."
-            className="w-full rounded-t-[8px]"
+            width={32}
+            height={32}
+            src="/images/assistant-pfp.png"
+            alt="assistant pfp"
+            className="aspect-square w-[32px] h-[32px] border-1 border-gray-500 rounded-full"
           />
-          <p className="text-[#00526C] text-sm pt-3 pb-1">Aug 10 - Aug 17</p>
-          <h4 className="text-xl font-semibold">Cultural Tapestry of Spain.</h4>
-          <p className="text-[rgba(0,0,0,0.6)] text-sm font-medium">
-            Experience the Allure of Spain: Rich Culture, Stunning Landscapes,
-            and More! Vibrant Culture and Exquisite Cuisine! Build your best
-            memories in one of the magic places.
-          </p>
-          <button className="mt-4 px-4 py-2 rounded-md text-white bg-light-primary text-sm hover:bg-light-primary/80 transition-all duration-300 ease-linear">
-            Book Now
-          </button>
+          <div className="flex flex-col">
+            <Image
+              src={"/images/tapestry.jpg"}
+              width={600}
+              height={600}
+              alt="Cultural Tapestry of Spain."
+              className="w-full rounded-t-[8px]"
+            />
+            <p className="text-[#00526C] text-sm pt-3 pb-1">Aug 10 - Aug 17</p>
+            <h4 className="text-xl font-semibold">
+              Cultural Tapestry of Spain.
+            </h4>
+            <p className="text-[rgba(0,0,0,0.6)] text-sm font-medium w-11/12">
+              Experience the Allure of Spain: Rich Culture, Stunning Landscapes,
+              and More! Vibrant Culture and Exquisite Cuisine! Build your best
+              memories in one of the magic places.
+            </p>
+            <button className="w-fit mt-4 px-4 py-2 rounded-md text-white bg-light-primary text-sm hover:bg-light-primary/80 transition-all duration-300 ease-linear">
+              Book Now
+            </button>
+          </div>
         </div>
-        <div className="mt-16">msg</div>
+        <div className="mt-16 space-y-12">
+          <div className="flex gap-3 items-center">
+            <Image
+              width={32}
+              height={32}
+              src="/images/user-pfp.jpg"
+              alt="assistant pfp"
+              className="aspect-square w-[32px] h-[32px] border-1 border-gray-500 rounded-full"
+            />
+            <p className="w-1/2">Can you tell me more about Zrce beach?</p>
+          </div>
+          <div className="flex gap-3 items-start">
+            <Image
+              width={32}
+              height={32}
+              src="/images/assistant-pfp.png"
+              alt="assistant pfp"
+              className="aspect-square w-[32px] h-[32px] border-1 border-gray-500 rounded-full self-start"
+            />
+            <p className="w-1/2 flex items-center">
+              Zrce Beach is a popular beach destination located on the island of
+              Pag in Croatia, along the Adriatic Sea. It is renowned for its
+              vibrant party atmosphere, lively music festivals, and beautiful
+              surroundings.
+            </p>
+          </div>
+        </div>
       </div>
 
-      <div className="chat-wrapper ml-[64px] absolute bottom-[10px] left-0 right-0  pb-2 flex justify-center">
-        <div className="w-2/3 relative">
+      <div className="chat-wrapper ml-[43px] absolute bottom-[10px] left-0 right-0  pb-2 flex justify-center">
+        <div className="w-4/5 relative">
           <textarea
             placeholder="Ask me anything..."
             rows={1}

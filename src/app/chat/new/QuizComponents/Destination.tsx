@@ -7,22 +7,27 @@ import { HandleAnswerType } from "src/data/types";
 import Autocomplete from "react-google-autocomplete";
 
 const Destination = ({ handleAnswer }: { handleAnswer: HandleAnswerType }) => {
-  const [destinationValue, setDestinationValue] = useState<string | null>(null);
+  const [destinationValue, setDestinationValue] = useState<string | undefined>(
+    undefined
+  );
   const [selectedFromAutocomplete, setSelectedFromAutocomplete] =
     useState(false);
+  const [isTyping, setIsTyping] = useState(false);
 
   const handleDestinationSelection = (selectedDestination: string) => {
     setDestinationValue(selectedDestination);
     handleAnswer("destination", selectedDestination);
     setSelectedFromAutocomplete(false);
+    setIsTyping(false);
   };
 
   useEffect(() => {
-    console.log(destinationValue);
-    if (destinationValue) {
+    if (isTyping) {
+      handleAnswer("destination", "");
+    } else if (destinationValue !== undefined) {
       handleAnswer("destination", destinationValue);
     }
-  }, [destinationValue]);
+  }, [destinationValue, isTyping]);
 
   return (
     <>
@@ -35,11 +40,15 @@ const Destination = ({ handleAnswer }: { handleAnswer: HandleAnswerType }) => {
           onPlaceSelected={(place) => {
             setDestinationValue(place.formatted_address);
             setSelectedFromAutocomplete(true);
+            setIsTyping(false);
           }}
           value={destinationValue}
-          onInput={() => setDestinationValue(null)}
+          onInput={(e) => {
+            setDestinationValue((e.target as HTMLInputElement).value);
+            setIsTyping(true);
+          }}
           aria-placeholder="Where to?"
-          placeholder="Choose the destination."
+          placeholder="Select the destination."
         />
         <button>
           <SearchIcon className="cursor-pointer absolute left-2.5 top-1/2 translate-y-[-45%]" />
@@ -47,10 +56,9 @@ const Destination = ({ handleAnswer }: { handleAnswer: HandleAnswerType }) => {
       </form>
 
       <div
-        className={`
-          ${selectedFromAutocomplete && destinationValue ? "hidden" : "block"} 
-          flex gap-10 md:mt-10
-        `}
+        className={`${
+          selectedFromAutocomplete && destinationValue ? "hidden" : "block"
+        } flex gap-10 md:mt-10`}
       >
         <SingleChoiceQuestion
           items={destinationData}
