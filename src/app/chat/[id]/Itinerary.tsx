@@ -36,7 +36,7 @@ const Itinerary = () => {
   ];
 
   return (
-    <div className="w-3/5 bg-light-card_bg px-12 pt-12">
+    <div className="w-3/5 bg-light-card_bg px-12 pt-12 hidden md:block">
       <Accordion variant="splitted">
         {data.map((object, index) => (
           <AccordionItem

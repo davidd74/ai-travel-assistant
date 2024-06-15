@@ -25,10 +25,10 @@ const ChatWindow = () => {
   }, []);
 
   return (
-    <div className="w-full pt-15 pt-12 pb-4 pl-12 relative flex flex-col h-screen items-center">
-      <div className="ml-[64px] chat-height chat-width">
+    <div className="w-full pt-12 pb-4 md:pl-12 relative flex flex-col h-screen md:items-center px-4 md:px-0">
+      <div className="md:ml-[64px] chat-height chat-width">
         {/* itinerary card */}
-        <div className=" w-3/5 flex gap-3">
+        <div className="w-full md:w-3/5 flex gap-3">
           <Image
             width={32}
             height={32}
@@ -67,7 +67,7 @@ const ChatWindow = () => {
               alt="assistant pfp"
               className="aspect-square w-[32px] h-[32px] border-1 border-gray-500 rounded-full"
             />
-            <p className="w-1/2">Can you tell me more about Zrce beach?</p>
+            <p className="w-full md:w-1/2">Can you tell me more about Zrce beach?</p>
           </div>
           <div className="flex gap-3 items-start">
             <Image
@@ -77,7 +77,7 @@ const ChatWindow = () => {
               alt="assistant pfp"
               className="aspect-square w-[32px] h-[32px] border-1 border-gray-500 rounded-full self-start"
             />
-            <p className="w-1/2 flex items-center">
+            <p className="w-4/5 md:w-1/2 flex items-center">
               Zrce Beach is a popular beach destination located on the island of
               Pag in Croatia, along the Adriatic Sea. It is renowned for its
               vibrant party atmosphere, lively music festivals, and beautiful
@@ -87,8 +87,8 @@ const ChatWindow = () => {
         </div>
       </div>
 
-      <div className="chat-wrapper ml-[43px] absolute bottom-[10px] left-0 right-0  pb-2 flex justify-center">
-        <div className="w-4/5 relative">
+      <div className="chat-wrapper md:ml-[43px] absolute bottom-[10px] left-0 right-0  pb-2 flex justify-center">
+        <div className="px-4 md:px-0 w-full md:w-4/5 relative">
           <textarea
             placeholder="Ask me anything..."
             rows={1}
@@ -98,7 +98,7 @@ const ChatWindow = () => {
             style={{ maxHeight: "150px" }}
           ></textarea>
 
-          <button className="absolute right-[15px] top-1/2 translate-y-[-35%]">
+          <button className="absolute right-[30px] top-1/2 translate-y-[-35%]">
             <Airplane2DIcon />
           </button>
         </div>
