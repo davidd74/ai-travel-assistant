@@ -10,12 +10,50 @@ body {
   @apply bg-light-background;
 }
 
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
 .layout-container {
   @apply max-w-screen-2xl mx-auto w-full px-4;
 }
 
+.chat-textarea::-webkit-scrollbar,
+.chat-scrollbar::-webkit-scrollbar {
+  width: 10px;
+  margin-left: 5px;
+}
+
+.chat-textarea::-webkit-scrollbar-thumb,
+.chat-scrollbar::-webkit-scrollbar-thumb {
+  background-color: #a0a0a0;
+  border-radius: 10px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+
+.chat-textarea::-webkit-scrollbar-thumb:hover {
+  background-color: #888;
+}
+
+.chat-textarea::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.chat-textarea::-webkit-scrollbar-button {
+  display: none;
+}
+
 .animate__animated.animate__fadeIn {
   --animate-duration: 450ms;
+}
+
+.sticky-header {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
 }
 
 .button-fn {
@@ -42,31 +80,8 @@ body {
   width: calc(100% - 64px);
 }
 
-.chat-wrapper {
-  width: calc(100% - 64px);
-}
-
 .chat-height {
-  height: calc(100vh - 115px);
-  overflow: auto;
-}
-
-.chat-width {
-  width: calc(100% - 64px);
-}
-
-@media (max-width: 768px) {
-  .chat-wrapper {
-    width: 100%;
-  }
-
-  .chat-width {
-    width: 98%;
-  }
-
-  .quiz-wrapper {
-    width: 92%;
-  }
+  height: calc(100% - 80px);
 }
 
 .chat-textarea::-webkit-scrollbar,
