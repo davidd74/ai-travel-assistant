@@ -47,9 +47,10 @@ body {
 }
 
 .chat-height {
-  height: calc(100vh - 117px);
+  height: calc(100vh - 115px);
   overflow: auto;
 }
+
 .chat-width {
   width: calc(100% - 64px);
 }
@@ -58,13 +59,24 @@ body {
   .chat-wrapper {
     width: 100%;
   }
+
+  .chat-width {
+    width: 98%;
+  }
+
+  .quiz-wrapper {
+    width: 92%;
+  }
 }
 
-.chat-textarea::-webkit-scrollbar {
+.chat-textarea::-webkit-scrollbar,
+.chat-window::-webkit-scrollbar {
   width: 10px;
+  margin-left: 5px;
 }
 
-.chat-textarea::-webkit-scrollbar-thumb {
+.chat-textarea::-webkit-scrollbar-thumb,
+.chat-window::-webkit-scrollbar-thumb {
   background-color: #a0a0a0;
   border-radius: 10px;
   border: 2px solid transparent;

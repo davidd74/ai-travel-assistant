@@ -58,7 +58,7 @@ const Quiz: React.FC = () => {
   }, [answers]);
 
   return (
-    <div className="bg-light-background quiz-wrapper md:px-12 flex flex-col items-start justify-start lg:pt-12 ml-[32px]">
+    <div className="bg-light-background quiz-wrapper md:px-12 flex flex-col items-start justify-start lg:pt-12 md:ml-[32px]">
       <Toaster position="top-right" />
 
       <div className="flex w-full justify-center items-center flex-col">

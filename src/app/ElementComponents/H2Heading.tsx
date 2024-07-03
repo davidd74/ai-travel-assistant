@@ -6,7 +6,7 @@ interface H2HeadingProps {
 
 const H2Heading = ({ text }: H2HeadingProps) => {
   return (
-    <h2 className="font-semibold pt-12 lg:pt-16 text-xl sm:text-2xl lg:text-4xl">
+    <h2 className="font-semibold pt-8 md:pt-12 lg:pt-16 text-xl sm:text-2xl lg:text-4xl">
       {text}
     </h2>
   );

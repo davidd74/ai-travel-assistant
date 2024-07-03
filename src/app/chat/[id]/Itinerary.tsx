@@ -1,9 +1,13 @@
 "use client";
 
+interface itineraryProps {
+  display: string;
+}
+
 import React from "react";
 import { Accordion, AccordionItem } from "@nextui-org/react";
 
-const Itinerary = () => {
+const Itinerary = (props: itineraryProps) => {
   let msg = "david here";
   const data = [
     {
@@ -36,7 +40,9 @@ const Itinerary = () => {
   ];
 
   return (
-    <div className="w-3/5 bg-light-card_bg px-12 pt-12 hidden md:block">
+    <div
+      className={`md:w-3/5 ${props.display} mt-[65px] w-full md:mt-0 bg-light-card_bg px-4 xl:px-12 py-1 overflow-y-auto`}
+    >
       <Accordion variant="splitted">
         {data.map((object, index) => (
           <AccordionItem
@@ -67,43 +73,37 @@ const Itinerary = () => {
             </div>
           </AccordionItem>
         ))}
-
-        {/* <AccordionItem
-          key="1"
-          aria-label="Day 1"
-          title="Day 1"
-          subtitle="Arrival and beach party at the beach"
-          style={{
-            backgroundColor: "white",
-            margin: "10px 0",
-          }}
-        >
-          <div className="">{msg}</div>
-        </AccordionItem>
-        <AccordionItem
-          key="2"
-          aria-label="Day 2"
-          title="Day 2"
-          style={{ backgroundColor: "white", margin: "" }}
-        >
-          <div
+      </Accordion>
+      <Accordion variant="splitted">
+        {data.map((object, index) => (
+          <AccordionItem
+            key={index}
+            aria-label={`Day ${index + 1}`}
+            title={`Day ${index + 1}`}
+            subtitle={object.daySummary}
             style={{
-              // backgroundColor: "#F0F4F9",
-              height: "100%",
+              backgroundColor: "white",
               margin: "10px 0",
+              padding: "0 15px 15px 15px",
+              boxShadow: "rgba(0, 0, 0, 0.1) 0px 1px 2px 0px",
             }}
           >
-            {msg}
-          </div>
-        </AccordionItem>
-        <AccordionItem
-          key="3"
-          aria-label="Day 3"
-          title="Day 3"
-          style={{ backgroundColor: "white", margin: "10px 0" }}
-        >
-          <div style={{ height: "100%" }}>{msg}</div>
-        </AccordionItem> */}
+            <div className="space-y-6">
+              <div>
+                <strong>Morning:</strong>
+                <div>{object.morning}</div>
+              </div>
+              <div>
+                <strong>Afternoon:</strong>
+                <div>{object.afternoon}</div>
+              </div>
+              <div>
+                <strong>Evening:</strong>
+                <div>{object.evening}</div>
+              </div>
+            </div>
+          </AccordionItem>
+        ))}
       </Accordion>
     </div>
   );
