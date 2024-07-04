@@ -52,16 +52,16 @@ const SelectDate = ({ handleAnswer }: { handleAnswer: HandleAnswerType }) => {
       range.start.month - 1,
       range.start.day
     );
-    let end = new Date(range.end.year, range.end.month - 1, range.end.day);
+    let end = new Date(range.end.year, range.end.month - 1, range.end.day + 1);
     const diffDays = Math.ceil(
       (end.getTime() - start.getTime()) / (1000 * 60 * 60 * 24)
     );
 
-    if (diffDays < 2) {
+    if (diffDays < 3) {
       end = new Date(start.getTime());
-      end.setDate(start.getDate() + 2);
+      end.setDate(start.getDate() + 3);
       toast.error("Select at least 2 days");
-    } else if (diffDays >= 7) {
+    } else if (diffDays > 7) {
       end = new Date(start.getTime());
       end.setDate(start.getDate() + 7);
       toast.error("You can't select more than 7 days");
@@ -77,6 +77,8 @@ const SelectDate = ({ handleAnswer }: { handleAnswer: HandleAnswerType }) => {
   };
 
   useEffect(() => {
+    console.log(selectedRange);
+
     if (selectedRange.start && selectedRange.end) {
       setShowCalendar(false);
     }

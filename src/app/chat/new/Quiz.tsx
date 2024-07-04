@@ -9,6 +9,7 @@ import Budget from "./QuizComponents/Budget";
 import { button } from "@nextui-org/theme";
 import toast, { Toaster } from "react-hot-toast";
 import { useRouter } from "next/navigation";
+import axios from "axios";
 
 type AnswersType = {
   destination: string;
@@ -38,31 +39,37 @@ const Quiz: React.FC = () => {
     setAnswers((prevState) => ({ ...prevState, [question]: answer }));
   };
 
-  const isButtonDisabled = Object.values(answers).some(
-    (answer) => !answer || (Array.isArray(answer) && answer.length === 0)
-  );
+  const isButtonDisabled =
+    !answers.destination ||
+    !answers.date ||
+    !answers.goers ||
+    answers.activities.length === 0 ||
+    answers.budget <= 0;
 
-  const onSubmit = (e: React.FormEvent) => {
+  const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     if (isButtonDisabled) {
       toast.error("Please answer all the questions");
     } else {
-      toast.success("Itinerary created successfully");
+      console.log(answers);
+      const response = await axios.post("/api/itinerary", { answers });
+
+      localStorage.setItem(
+        "itinerary",
+        JSON.stringify(response.data.choices[0].message.content)
+      );
+
       router.push("/chat/12");
+      console.log(response.data.choices[0].message.content);
     }
   };
-
-  useEffect(() => {
-    console.log(answers);
-  }, [answers]);
 
   return (
     <div className="bg-light-background quiz-wrapper md:px-12 flex flex-col items-start justify-start lg:pt-12 md:ml-[32px] h-screen overflow-y-scroll">
       <Toaster position="top-right" />
 
       <div className="flex w-full justify-center items-center flex-col">
-        {/* <QuizProgressBar quizProgress={1} /> */}
         <Destination handleAnswer={handleAnswer} />
         <Date handleAnswer={handleAnswer} />
         <Goers handleAnswer={handleAnswer} />

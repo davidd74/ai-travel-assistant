@@ -4,78 +4,20 @@ interface itineraryProps {
   display: string;
 }
 
-import React from "react";
+import React, { useEffect } from "react";
 import { Accordion, AccordionItem } from "@nextui-org/react";
 
 const Itinerary = (props: itineraryProps) => {
-  let msg = "david here";
-  const data = [
-    {
-      day: 1,
-      morning: "Arrive in Split and check into your accommodation.",
-      afternoon:
-        "Explore the historic Diocletian's Palace and wander through the narrow streets of the Old Town.",
-      evening: "Enjoy a traditional Croatian dinner at a local restaurant.",
-      daySummary: "Arrival and beach party at the beach",
-    },
-    {
-      day: 2,
-      morning:
-        "Take a morning hike in the nearby Marjan Forest Park, enjoying the natural beauty and stunning views of the city and the Adriatic Sea.",
-      afternoon:
-        "Visit the beautiful Bačvice Beach and relax in the sun or try some water activities.",
-      evening:
-        "Experience the vibrant nightlife of Split by visiting some of the popular bars and clubs in the city center.",
-      daySummary: "Morning hike - Marjan Forest Park",
-    },
-    {
-      day: 3,
-      morning: "Enjoy a traditional Croatian dinner at a local restaurant.",
-      afternoon:
-        "Explore the historic Diocletian's Palace and wander through the narrow streets of the Old Town.",
-      evening:
-        "Take a morning hike in the nearby Marjan Forest Park, enjoying the natural beauty and stunning views of the city and the Adriatic Sea.",
-      daySummary: "Morning hike - Marjan Forest Park",
-    },
-  ];
-
+  const data = localStorage.getItem("itinerary");
+  const dataParsed = JSON.parse(data || "{}");
+  const dataParsed2 = JSON.parse(dataParsed || "{}");
+  console.log(dataParsed2);
   return (
     <div
       className={`md:w-3/5 ${props.display} mt-[65px] w-full md:mt-0 bg-light-card_bg px-4 xl:px-12 py-1 overflow-y-auto`}
     >
       <Accordion variant="splitted">
-        {data.map((object, index) => (
-          <AccordionItem
-            key={index}
-            aria-label={`Day ${index + 1}`}
-            title={`Day ${index + 1}`}
-            subtitle={object.daySummary}
-            style={{
-              backgroundColor: "white",
-              margin: "10px 0",
-              padding: "0 15px 15px 15px",
-              boxShadow: "rgba(0, 0, 0, 0.1) 0px 1px 2px 0px",
-            }}
-          >
-            <div className="space-y-6">
-              <div>
-                <strong>Morning:</strong>
-                <div>{object.morning}</div>
-              </div>
-              <div>
-                <strong>Afternoon:</strong>
-                <div>{object.afternoon}</div>
-              </div>
-              <div>
-                <strong>Evening:</strong>
-                <div>{object.evening}</div>
-              </div>
-            </div>
-          </AccordionItem>
-        ))}
-      </Accordion>
-      <Accordion variant="splitted">
-        {data.map((object, index) => (
+        {dataParsed2.itinerary.map((object: any, index: any) => (
           <AccordionItem
             key={index}
             aria-label={`Day ${index + 1}`}
