@@ -7,9 +7,7 @@ import { HandleAnswerType } from "src/data/types";
 import Autocomplete from "react-google-autocomplete";
 
 const Destination = ({ handleAnswer }: { handleAnswer: HandleAnswerType }) => {
-  const [destinationValue, setDestinationValue] = useState<string | undefined>(
-    undefined
-  );
+  const [destinationValue, setDestinationValue] = useState<string>("");
   const [selectedFromAutocomplete, setSelectedFromAutocomplete] =
     useState(false);
   const [isTyping, setIsTyping] = useState(false);
@@ -24,7 +22,7 @@ const Destination = ({ handleAnswer }: { handleAnswer: HandleAnswerType }) => {
   useEffect(() => {
     if (isTyping) {
       handleAnswer("destination", "");
-    } else if (destinationValue !== undefined) {
+    } else if (destinationValue !== "") {
       handleAnswer("destination", destinationValue);
     }
   }, [destinationValue, isTyping]);
