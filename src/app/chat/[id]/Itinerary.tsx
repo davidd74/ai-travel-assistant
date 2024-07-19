@@ -2,22 +2,19 @@
 
 interface itineraryProps {
   display: string;
+  parsedData: any;
 }
 
 import React, { useEffect } from "react";
 import { Accordion, AccordionItem } from "@nextui-org/react";
 
 const Itinerary = (props: itineraryProps) => {
-  const data = localStorage.getItem("itinerary");
-  const dataParsed = JSON.parse(data || "{}");
-  const dataParsed2 = JSON.parse(dataParsed || "{}");
-  console.log(dataParsed2);
   return (
     <div
       className={`md:w-3/5 ${props.display} mt-[65px] w-full md:mt-0 bg-light-card_bg px-4 xl:px-12 py-1 overflow-y-auto`}
     >
       <Accordion variant="splitted">
-        {dataParsed2.itinerary.map((object: any, index: any) => (
+        {props.parsedData.itinerary?.map((object: any, index: any) => (
           <AccordionItem
             key={index}
             aria-label={`Day ${index + 1}`}
@@ -25,7 +22,7 @@ const Itinerary = (props: itineraryProps) => {
             subtitle={object.daySummary}
             style={{
               backgroundColor: "white",
-              margin: "10px 0",
+              margin: "5px 0",
               padding: "0 15px 15px 15px",
               boxShadow: "rgba(0, 0, 0, 0.1) 0px 1px 2px 0px",
             }}

@@ -41,7 +41,7 @@ const Quiz: React.FC = () => {
 
   const isButtonDisabled =
     !answers.destination ||
-    !answers.date ||
+    Object.keys((answers.date as any).start).length === 0 ||
     !answers.goers ||
     answers.activities.length === 0 ||
     answers.budget <= 0;

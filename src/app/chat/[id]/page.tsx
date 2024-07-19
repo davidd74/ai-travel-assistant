@@ -8,7 +8,6 @@ const page = () => {
     <div className="relative flex h-screen max-h-screen">
       <ChatSidebar />
       <ChatWindow />
-      <Itinerary display="hidden md:block" />
     </div>
   );
 };
