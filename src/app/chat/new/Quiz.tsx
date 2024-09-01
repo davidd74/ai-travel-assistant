@@ -49,6 +49,8 @@ const Quiz: React.FC = () => {
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
+    localStorage.clear();
+
     if (isButtonDisabled) {
       toast.error("Please answer all the questions");
     } else {
