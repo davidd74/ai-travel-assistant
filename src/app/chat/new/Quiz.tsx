@@ -41,7 +41,7 @@ const Quiz: React.FC = () => {
 
   const isButtonDisabled =
     !answers.destination ||
-    !answers.date ||
+    Object.keys((answers.date as any).start).length === 0 ||
     !answers.goers ||
     answers.activities.length === 0 ||
     answers.budget <= 0;
@@ -66,7 +66,7 @@ const Quiz: React.FC = () => {
   };
 
   return (
-    <div className="bg-light-background quiz-wrapper md:px-12 flex flex-col items-start justify-start lg:pt-12 md:ml-[32px] h-screen overflow-y-scroll">
+    <div className="bg-light-background quiz-wrapper md:px-12 flex flex-col items-start justify-start md:overflow-y-scroll lg:pt-12 md:ml-[32px] h-screen">
       <Toaster position="top-right" />
 
       <div className="flex w-full justify-center items-center flex-col">
