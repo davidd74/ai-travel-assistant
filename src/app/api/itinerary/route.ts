@@ -94,6 +94,12 @@ export async function POST(request: Request) {
    place name. Dont say have rooftop lunch, say go to "place name" and have rooftop lunch.  
     8. On the first day, dont say things like flight to destination name because you can't know how the user arrived.
     Sample output JSON format, MAKE SURE THAT THE FORMAT IS PERFECT:
+    9. Make sure that you keep the given date and dont modify it!!! 
+    ${
+      (console.log(answers.date.start.day),
+      console.log(answers.date.start.month),
+      console.log(answers.date.start.year))
+    }
     
       "tripDetails": {
         "numberOfDays": "${numberOfDays}",
@@ -102,6 +108,7 @@ export async function POST(request: Request) {
         "activities": "${answers.activities.join(", ")}",
         "travelers": "${answers.goers}"
         "dates": {
+          
           "start": {
             "day": "${answers.date.start.day}",
             "month": "${answers.date.start.month}",

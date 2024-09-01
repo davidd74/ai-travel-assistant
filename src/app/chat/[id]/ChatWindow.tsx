@@ -7,6 +7,8 @@ import axios from "axios";
 import Image from "next/image";
 import React, { useEffect } from "react";
 import Itinerary from "./Itinerary";
+import Link from "next/link";
+import CloseIcon from "@/public/icons/CloseIcon";
 
 const ChatWindow = () => {
   const textArea = React.createRef<HTMLTextAreaElement>();
@@ -18,9 +20,14 @@ const ChatWindow = () => {
   ]);
 
   const [parsedData, setParsedData] = React.useState<any>({});
+  const [openMenu, setOpenMenu] = React.useState<boolean>(false);
 
   const buttonClass =
     "bg-light-box_bg border-2 shadow-sm hover:border-light-border transition-all duration-500 ease-out py-2 px-4 rounded-lg cursor-pointer";
+
+  const toggleNavbar = () => {
+    setOpenMenu(!openMenu);
+  };
 
   const sendMessage = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -118,11 +125,50 @@ const ChatWindow = () => {
     <>
       {parsedData.tripDetails ? (
         <>
-          {" "}
+          {/* navbar here */}
+          {openMenu && (
+            <nav className="z-20 fixed bg-white w-full h-screen max-h-screen overflow-hidden transition-all">
+              <div className="py-4">
+                <div className=" border-b-2">
+                  <div className="flex justify-between items-center pl-4 pb-3.5">
+                    <div className="flex gap-2 items-center">
+                      <Image
+                        src={"/images/assistant-hero.png"}
+                        width={40}
+                        height={40}
+                        alt="assistant"
+                        className="border-2 rounded-full border-gray-700 max-w-[170px] md:max-w-[220px]"
+                      />
+                      <h4 className="text-lg font-semibold">Travel AI</h4>
+                    </div>
+                    <button
+                      className={`p-1 right-4 bg-light-box_bg absolute rounded-lg shadow-sm border-2 hover:border-light-border transition-all duration-500 ease-out`}
+                      onClick={toggleNavbar}
+                    >
+                      <CloseIcon />
+                    </button>
+                  </div>
+                </div>
+
+                <ul className="p-4 text-2xl font-semibold space-y-2 mt-[50px]">
+                  <li>
+                    <Link href="/" className="hover:text-light-primary transition-all duration-200 ease-linear">
+                      Home
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/chat/new" className="hover:text-light-primary transition-all duration-200 ease-linear">New Trip</Link>
+                  </li>
+                </ul>
+              </div>
+            </nav>
+          )}
+
           <div className="w-full flex flex-col justify-between overflow-hidden">
             <nav className="bg-light-card_bg pl-4 flex items-center justify-start border-b-2 gap-3 py-3 fixed w-full top-0 left-0 md:hidden">
               <button
                 className={`p-1 right-4 bg-light-box_bg absolute rounded-lg shadow-sm border-2 hover:border-light-border transition-all duration-500 ease-out`}
+                onClick={toggleNavbar}
               >
                 <HamburgerIcon />
               </button>
@@ -153,10 +199,10 @@ const ChatWindow = () => {
                       {parsedData?.tripDetails && (
                         <Image
                           src={`${parsedData.tripDetails?.destinationImage}`}
-                          width={600}
-                          height={600}
+                          width={400}
+                          height={400}
                           alt="trip destination image"
-                          className="w-[350px] h-auto object-fill rounded-t-[8px]"
+                          className="h-auto object-fill rounded-t-[8px]"
                         />
                       )}
 
@@ -164,10 +210,10 @@ const ChatWindow = () => {
                         {formatDate(parsedData.tripDetails.dates.start)} -{" "}
                         {formatDate(parsedData.tripDetails.dates.end)}
                       </p>
-                      <h4 className="text-xl font-semibold lg:w-4/5 max-w-full">
+                      <h4 className="text-xl font-semibold max-w-[400px]">
                         Trip to {parsedData.tripDetails?.destination}
                       </h4>
-                      <p className="text-[rgba(0,0,0,0.6)] text-sm font-medium w-full  pr-2 max-w-[350px]">
+                      <p className="text-[rgba(0,0,0,0.6)] text-sm font-medium w-full  pr-2 max-w-[400px] mt-2">
                         {parsedData.tripDetails.dates.destinationSummary}
                       </p>
                       <button
@@ -203,14 +249,22 @@ const ChatWindow = () => {
                             className="aspect-square w-[32px] h-[32px] border-1 border-gray-500 rounded-full"
                           />
                         )}
-                        <p className="w-full md:w-1/2">{message.content}</p>
+                        <p
+                          className="w-full md:w-1/2"
+                          dangerouslySetInnerHTML={{
+                            __html: message.content.replace(
+                              /\*\*(.*?)\*\*/g,
+                              "<strong>$1</strong>"
+                            ),
+                          }}
+                        />
                       </div>
                     ))}
                     <div ref={div} />
                   </div>
                 </div>
-                <div className="flex justify-center fixed md:static w-full left-0 bottom-0">
-                  <form className="px-4 md:px-0 w-full md:w-11/12 relative">
+                <div className="flex justify-center fixed md:static w-full bottom-0 left-0">
+                  <form className="px-4 mb-2 md:px-0 w-full md:w-11/12 relative">
                     <textarea
                       placeholder="Ask me anything..."
                       rows={1}
