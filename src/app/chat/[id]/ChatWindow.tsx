@@ -152,12 +152,20 @@ const ChatWindow = () => {
 
                 <ul className="p-4 text-2xl font-semibold space-y-2 mt-[50px]">
                   <li>
-                    <Link href="/" className="hover:text-light-primary transition-all duration-200 ease-linear">
+                    <Link
+                      href="/"
+                      className="hover:text-light-primary transition-all duration-200 ease-linear"
+                    >
                       Home
                     </Link>
                   </li>
                   <li>
-                    <Link href="/chat/new" className="hover:text-light-primary transition-all duration-200 ease-linear">New Trip</Link>
+                    <Link
+                      href="/chat/new"
+                      className="hover:text-light-primary transition-all duration-200 ease-linear"
+                    >
+                      New Trip
+                    </Link>
                   </li>
                 </ul>
               </div>
@@ -219,7 +227,7 @@ const ChatWindow = () => {
                       <button
                         onClick={() =>
                           axios.get(
-                            "https://places.googleapis.com/v1/miami,florida/media?key=AIzaSyD80iAHVPwYtoT_17op5WDQmjX5fGbFvn4&maxWidthPx=1920"
+                            `https://places.googleapis.com/v1/miami,florida/media?key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_KEY}&maxWidthPx=1920`
                           )
                         }
                         className="w-fit mt-4 px-4 py-2 rounded-md text-white bg-light-primary text-sm hover:bg-light-primary/80 transition-all duration-300 ease-linear"
