@@ -11,6 +11,7 @@ import Link from "next/link";
 import CloseIcon from "@/public/icons/CloseIcon";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
+import { redirect } from "next/navigation";
 
 const ChatWindow = () => {
   const textArea = React.createRef<HTMLTextAreaElement>();
@@ -150,8 +151,7 @@ const ChatWindow = () => {
       setParsedData(JSON.parse(dataParsed || "{}"));
     } else {
       toast.error("Trip not found");
-      console.log("how many logs?")
-      router.push("/chat/new");
+      redirect("/chat/new");
     }
   }, []);
 
