@@ -84,6 +84,12 @@ body {
   height: calc(100% - 80px);
 }
 
+@media screen and (max-width: 768px) {
+  .quiz-wrapper {
+    width: 95%;
+  }
+}
+
 .chat-textarea::-webkit-scrollbar,
 .chat-window::-webkit-scrollbar {
   width: 10px;

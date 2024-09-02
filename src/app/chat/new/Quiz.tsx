@@ -62,13 +62,13 @@ const Quiz: React.FC = () => {
         JSON.stringify(response.data.choices[0].message.content)
       );
 
-      router.push("/chat/12");
+      router.push("/chat");
       console.log(response.data.choices[0].message.content);
     }
   };
 
   return (
-    <div className="bg-light-background quiz-wrapper md:px-12 flex flex-col items-start justify-start md:overflow-y-scroll lg:pt-12 md:ml-[32px] h-screen">
+    <div className="bg-light-background quiz-wrapper md:px-12 flex flex-col items-start justify-start md:overflow-y-scroll lg:pt-12 md:ml-[32px] max-h-screen">
       <Toaster position="top-right" />
 
       <div className="flex w-full justify-center items-center flex-col">

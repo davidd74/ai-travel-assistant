@@ -16,7 +16,7 @@ type Props = {
 
 const ChoiceQuestion = (props: Props) => {
   return (
-    <div className="pt-6 grid grid-cols-2 md:grid-cols-4 gap-x-6">
+    <div className="pt-6 grid grid-cols-2 md:grid-cols-4 gap-4  ">
       {props.items.map((item, index) => (
         <div
           key={index}

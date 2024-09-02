@@ -9,24 +9,49 @@ import React, { useEffect } from "react";
 import Itinerary from "./Itinerary";
 import Link from "next/link";
 import CloseIcon from "@/public/icons/CloseIcon";
+import { parseSetCookie } from "next/dist/compiled/@edge-runtime/cookies";
+import { useRouter } from "next/navigation";
 
 const ChatWindow = () => {
   const textArea = React.createRef<HTMLTextAreaElement>();
+  const router = useRouter();
   const div = React.useRef<HTMLDivElement>(null);
   const [chatMessage, setChatMessage] = React.useState<string>("");
   const [view, setView] = React.useState<string>("chat");
   const [conversation, setConversation] = React.useState([
-    { role: "system", content: "You are Bob. Bob is extremely nice." },
+    { role: "system", content: "" },
   ]);
 
   const [parsedData, setParsedData] = React.useState<any>({});
   const [openMenu, setOpenMenu] = React.useState<boolean>(false);
 
   const buttonClass =
-    "bg-light-box_bg border-2 shadow-sm hover:border-light-border transition-all duration-500 ease-out py-2 px-4 rounded-lg cursor-pointer";
+    "bg-light-box_bg border-2 shadow-sm hover:border-light-border transition-all duration-500 ease-out py-2 px-3 text-sm sm:text-md rounded-lg cursor-pointer";
 
   const toggleNavbar = () => {
     setOpenMenu(!openMenu);
+  };
+
+  const makeBookingLink = (
+    destination: string | undefined,
+    startDate: any,
+    endDate: any,
+    travelers: string | undefined
+  ): string => {
+    const baseUrl = "https://www.booking.com/searchresults.html";
+    const params = new URLSearchParams({
+      ss: destination || "",
+      checkin_year: startDate?.year || "",
+      checkin_month: startDate?.month || "",
+      checkin_monthday: startDate?.day || "",
+      checkout_year: endDate?.year || "",
+      checkout_month: endDate?.month || "",
+      checkout_monthday: endDate?.day || "",
+      group_adults: travelers === "solo" ? "1" : "2",
+      no_rooms: "1",
+      group_children: "0",
+    });
+    return `${baseUrl}?${params.toString()}`;
   };
 
   const sendMessage = async (e: React.FormEvent) => {
@@ -71,6 +96,11 @@ const ChatWindow = () => {
       textArea.current!.style.height = `${scHeight + 5}px`;
       textArea.current!.style.overflowY = "hidden";
     }
+  };
+
+  const deleteTrip = () => {
+    localStorage.clear();
+    router.push("/chat/new");
   };
 
   const formatDate = (date: any) => {
@@ -118,6 +148,8 @@ const ChatWindow = () => {
     const dataParsed = JSON.parse(data || "{}");
     if (Object.keys(dataParsed).length > 0) {
       setParsedData(JSON.parse(dataParsed || "{}"));
+    } else {
+      router.push("/chat/new");
     }
   }, []);
 
@@ -127,7 +159,7 @@ const ChatWindow = () => {
         <>
           {/* navbar here */}
           {openMenu && (
-            <nav className="z-20 fixed bg-white w-full h-screen max-h-screen overflow-hidden transition-all">
+            <nav className="z-20 fixed bg-light-background w-full h-screen max-h-screen overflow-hidden transition-all">
               <div className="py-4">
                 <div className=" border-b-2">
                   <div className="flex justify-between items-center pl-4 pb-3.5">
@@ -137,6 +169,7 @@ const ChatWindow = () => {
                         width={40}
                         height={40}
                         alt="assistant"
+                        priority
                         className="border-2 rounded-full border-gray-700 max-w-[170px] md:max-w-[220px]"
                       />
                       <h4 className="text-lg font-semibold">Travel AI</h4>
@@ -191,6 +224,14 @@ const ChatWindow = () => {
               >
                 Itinerary
               </button>
+
+              <button
+                onClick={deleteTrip}
+                className={`${buttonClass} bg-red-500 text-white font-medium
+                `}
+              >
+                Delete Trip
+              </button>
             </nav>
             {view === "chat" ? (
               <>
@@ -224,15 +265,18 @@ const ChatWindow = () => {
                       <p className="text-[rgba(0,0,0,0.6)] text-sm font-medium w-full  pr-2 max-w-[400px] mt-2">
                         {parsedData.tripDetails.dates.destinationSummary}
                       </p>
-                      <button
-                        onClick={() =>
-                          axios.get(
-                            `https://places.googleapis.com/v1/miami,florida/media?key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_KEY}&maxWidthPx=1920`
-                          )
-                        }
-                        className="w-fit mt-4 px-4 py-2 rounded-md text-white bg-light-primary text-sm hover:bg-light-primary/80 transition-all duration-300 ease-linear"
-                      >
-                        Book Now
+                      <button className="w-fit mt-4 px-4 py-2 rounded-md text-white bg-light-primary text-sm hover:bg-light-primary/80 transition-all duration-300 ease-linear">
+                        <Link
+                          target="_blank"
+                          href={makeBookingLink(
+                            parsedData.tripDetails?.destination,
+                            parsedData.tripDetails?.dates.start,
+                            parsedData.tripDetails?.dates.end,
+                            parsedData.tripDetails?.travelers
+                          )}
+                        >
+                          Book Accomodation
+                        </Link>
                       </button>
                     </div>
                   </div>

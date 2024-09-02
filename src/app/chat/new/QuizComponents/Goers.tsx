@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, {useState } from "react";
 import SingleChoiceQuestion from "./ChoiceQuestion";
 import { goersData } from "src/data/goersData";
 import H3Heading from "src/app/ElementComponents/H3Heading";

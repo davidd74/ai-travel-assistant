@@ -27,15 +27,15 @@ const Features = () => {
   return (
     <div className="mt-4 w-full flex  flex-col items-center ">
       <H2Heading text="How it works" />
-      <div className="flex flex-col lg:w-[60%] gap-y-10 mt-6">
+      <div className="flex flex-col xl:w-[60%] gap-y-10 mt-6">
         {steps.map((step, index) => (
           <div
-            className={`rounded-2xl flex flex-col bg-light-grey justify-between p-4 ${
+            className={`rounded-xl flex flex-col bg-light-grey justify-between p-4 ${
               index % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"
             } gap-5`}
             key={index}
           >
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-4 px-4">
               <div className="">
                 <div className="text-center rounded-full w-[74.74px] h-[74.74px] justify-center flex items-center shadow-lg border-2 border-light-primary">
                   Step {index + 1}
@@ -43,20 +43,24 @@ const Features = () => {
               </div>
               <div>
                 <H3Heading
-                  className="!pt-0 mt-0 font-medium !text-3xl"
+                  className="!pt-0 mt-0 font-medium !text-2xl md:!text-3xl"
                   text="Select trip information"
                 />
-                <p className="mt-1 max-w-[400px]">{step.description}</p>
+                <p className="mt-1 text-sm md:text-lg max-w-[400px]">
+                  {step.description}
+                </p>
               </div>
             </div>
             {step.image && (
-              <Image
-                alt="step image"
-                src={`${step.image}`}
-                width={500}
-                height={500}
-                className=""
-              />
+              <div className="flex-shrink-0 md:max-w-[50%]">
+                <Image
+                  alt="step image"
+                  width={550}
+                  height={550}
+                  src={`${step.image}`}
+                  className="w-full h-auto object-contain"
+                />
+              </div>
             )}
           </div>
         ))}
