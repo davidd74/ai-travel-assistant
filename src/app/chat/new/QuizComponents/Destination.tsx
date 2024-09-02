@@ -5,6 +5,7 @@ import SingleChoiceQuestion from "./ChoiceQuestion";
 import H2Heading from "src/app/ElementComponents/H2Heading";
 import { HandleAnswerType } from "src/data/types";
 import Autocomplete from "react-google-autocomplete";
+import Link from "next/link";
 
 const Destination = ({ handleAnswer }: { handleAnswer: HandleAnswerType }) => {
   const [destinationValue, setDestinationValue] = useState<string>("");
@@ -29,6 +30,7 @@ const Destination = ({ handleAnswer }: { handleAnswer: HandleAnswerType }) => {
 
   return (
     <>
+    <div className="h-[36px] "></div>
       <H2Heading text="Plan your next trip" />
 
       <form className="flex relative w-4/5 md:w-2/3 lg:w-1/2 mt-4 md:mt-8 flex-col">

@@ -77,11 +77,11 @@ body {
 }
 
 .quiz-wrapper {
-  width: calc(100% - 64px);
+  width: 100%;
 }
 
 .chat-height {
-  height: calc(100% - 80px);
+  height: (100%);
 }
 
 @media screen and (max-width: 768px) {

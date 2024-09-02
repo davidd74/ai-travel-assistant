@@ -7,7 +7,7 @@ import Image from "next/image";
 const Features = () => {
   const steps = [
     {
-      title: "Pass the Quiz",
+      title: "Complete the Quiz",
       description:
         "Answer a few quick questions about your travel preferences, interests, and desired destinations. Our assistant will use your responses to create a travel plan for you.",
       image: "/images/step1.png",
@@ -15,12 +15,13 @@ const Features = () => {
     {
       title: "Explore Your Itinerary",
       description:
-        "Check out the itinerary our assistant has created for you and book your next adventure.",
+        "Check out the itinerary our assistant has created for you and ask any questions you may have.",
       image: "/images/step2.png",
     },
     {
-      title: "Book accomodation and enjoy",
-      description: "Enjoy your trip and ask our assistant for more details.",
+      title: "Book Accomodation and Enjoy!",
+      description: "Have fun!",
+      image: "/images/step3.png",
     },
   ];
 
@@ -44,7 +45,7 @@ const Features = () => {
               <div>
                 <H3Heading
                   className="!pt-0 mt-0 font-medium !text-2xl md:!text-3xl"
-                  text="Select trip information"
+                  text={step.title}
                 />
                 <p className="mt-1 text-sm md:text-lg max-w-[400px]">
                   {step.description}
@@ -55,8 +56,8 @@ const Features = () => {
               <div className="flex-shrink-0 md:max-w-[50%]">
                 <Image
                   alt="step image"
-                  width={550}
-                  height={550}
+                  width={500}
+                  height={500}
                   src={`${step.image}`}
                   className="w-full h-auto object-contain"
                 />
