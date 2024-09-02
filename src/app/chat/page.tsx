@@ -1,5 +1,5 @@
 import React from "react";
-import ChatSidebar from "../ChatSidebar";
+import ChatSidebar from "./ChatSidebar";
 import ChatWindow from "./ChatWindow";
 import Itinerary from "./Itinerary";
 

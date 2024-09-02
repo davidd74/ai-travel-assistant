@@ -9,7 +9,7 @@ import "animate.css";
 import NewChatIcon from "@/public/icons/NewChatIcon";
 import HamburgerIcon from "@/public/icons/HamburgerIcon";
 import ChatSidebar from "../ChatSidebar";
-import ChatWindow from "../[id]/ChatWindow";
+import ChatWindow from "../ChatWindow";
 import Quiz from "./Quiz";
 
 const Page = () => {
