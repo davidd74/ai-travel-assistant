@@ -12,7 +12,7 @@ import CloseIcon from "@/public/icons/CloseIcon";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import { redirect } from "next/navigation";
-import { calcLength } from "framer-motion";
+import { makeBookingLink } from "../utils/makeBookingLink";
 
 const ChatWindow = () => {
   const textArea = React.createRef<HTMLTextAreaElement>();
@@ -28,32 +28,10 @@ const ChatWindow = () => {
   const [openMenu, setOpenMenu] = React.useState<boolean>(false);
 
   const buttonClass =
-    "bg-light-box_bg border-2 shadow-sm hover:border-light-border transition-all duration-500 ease-out py-2 px-3 text-sm sm:text-md rounded-lg cursor-pointer";
+    "bg-light-box_bg border-2 shadow-sm hover:border-light-border transition-all duration-500 ease-out py-2.5 px-3 text-sm sm:text-md rounded-lg cursor-pointer";
 
   const toggleNavbar = () => {
     setOpenMenu(!openMenu);
-  };
-
-  const makeBookingLink = (
-    destination: string | undefined,
-    startDate: any,
-    endDate: any,
-    travelers: string | undefined
-  ): string => {
-    const baseUrl = "https://www.booking.com/searchresults.html";
-    const params = new URLSearchParams({
-      ss: destination || "",
-      checkin_year: startDate?.year || "",
-      checkin_month: startDate?.month || "",
-      checkin_monthday: startDate?.day || "",
-      checkout_year: endDate?.year || "",
-      checkout_month: endDate?.month || "",
-      checkout_monthday: endDate?.day || "",
-      group_adults: travelers === "solo" ? "1" : "2",
-      no_rooms: "1",
-      group_children: "0",
-    });
-    return `${baseUrl}?${params.toString()}`;
   };
 
   const sendMessage = async (e: React.FormEvent) => {
@@ -63,24 +41,26 @@ const ChatWindow = () => {
       const userMessage = { role: "user", content: chatMessage };
       const updatedConversation = [...conversation, userMessage];
       setConversation(updatedConversation);
-      setChatMessage("");
 
-      console.log("__ PARSED DATA ____");
-      console.log(parsedData);
+      // Save updated conversation to localStorage
+      localStorage.setItem("conversation", JSON.stringify(updatedConversation));
+      setChatMessage("");
 
       const response = await axios.post("/api/chat", {
         messages: updatedConversation,
         tripDetails: parsedData,
       });
 
-      console.log(response.data.choices[0].message.content);
-      setConversation([
-        ...updatedConversation,
-        {
-          role: "assistant",
-          content: response.data.choices[0].message.content,
-        },
-      ]);
+      const assistantMessage = {
+        role: "assistant",
+        content: response.data.choices[0].message.content,
+      };
+
+      const finalConversation = [...updatedConversation, assistantMessage];
+      setConversation(finalConversation);
+
+      // Update the stored conversation with assistant's reply
+      localStorage.setItem("conversation", JSON.stringify(finalConversation));
 
       if (textArea.current) {
         textArea.current.style.height = "auto";
@@ -105,6 +85,7 @@ const ChatWindow = () => {
 
   const deleteTrip = () => {
     localStorage.clear();
+    toast.success("Trip deleted");
     router.push("/chat/new");
   };
 
@@ -135,7 +116,7 @@ const ChatWindow = () => {
   };
 
   useEffect(() => {
-    if (chatMessage && parsedData === "") {
+    if (textArea.current && chatMessage.length === 0) {
       textArea.current!.style.height = "auto";
     }
   }, [chatMessage]);
@@ -152,10 +133,20 @@ const ChatWindow = () => {
     const data = localStorage.getItem("itinerary");
     const dataParsed = JSON.parse(data || "{}");
     if (Object.keys(dataParsed).length > 0) {
+      // double parsing because there are nested objects
       setParsedData(JSON.parse(dataParsed || "{}"));
     } else {
       toast.error("Trip not found");
       redirect("/chat/new");
+    }
+  }, []);
+
+  useEffect(() => {
+    const conversationData = localStorage.getItem("conversation");
+    if (conversationData) {
+      setConversation(JSON.parse(conversationData));
+    } else {
+      localStorage.setItem("conversation", JSON.stringify(conversation));
     }
   }, []);
 
@@ -271,9 +262,10 @@ const ChatWindow = () => {
                       <p className="text-[rgba(0,0,0,0.6)] text-sm font-medium w-full  pr-2 max-w-[400px] mt-2">
                         {parsedData.tripDetails.dates.destinationSummary}
                       </p>
-                      <button className="w-fit mt-4 px-4 py-2 rounded-md text-white bg-light-primary text-sm hover:bg-light-primary/80 transition-all duration-300 ease-linear">
+                      <div className="flex gap-3">
                         <Link
                           target="_blank"
+                          className="w-fit mt-4 px-4 py-2 rounded-md text-white bg-light-primary text-sm hover:bg-light-primary/80 transition-all duration-300 ease-linear"
                           href={makeBookingLink(
                             parsedData.tripDetails?.destination,
                             parsedData.tripDetails?.dates.start,
@@ -283,7 +275,14 @@ const ChatWindow = () => {
                         >
                           Book Accomodation
                         </Link>
-                      </button>
+                        <button
+                          onClick={deleteTrip}
+                          className={`rounded-md mt-4 text-sm  px-3 py-2 bg-red-500 text-white font-medium
+                `}
+                        >
+                          Delete Trip
+                        </button>
+                      </div>
                     </div>
                   </div>
 
@@ -322,7 +321,7 @@ const ChatWindow = () => {
                   </div>
                 </div>
                 <div className="flex justify-center fixed md:static w-full bottom-0 left-0">
-                  <form className="px-4 mb-2 md:px-0 w-full md:w-11/12 relative">
+                  <form className="px-4 md:px-0 w-full md:w-11/12 relative">
                     <textarea
                       placeholder="Ask me anything..."
                       rows={1}
@@ -351,7 +350,7 @@ const ChatWindow = () => {
           )}
         </>
       ) : (
-        <div>trip not found</div>
+        <div>Loading your trip...</div>
       )}
     </>
   );
