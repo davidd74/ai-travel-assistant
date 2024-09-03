@@ -17,6 +17,10 @@ const Page = () => {
     try {
       const userMessage = { role: "user", content: chatMessage };
       setMessageCollection((prevMessages) => [...prevMessages, userMessage]);
+      localStorage.setItem(
+        "messageCollection",
+        JSON.stringify(messageCollection)
+      );
       setChatMessage("");
 
       const response = await axios.post("/api/ai-assistant", {

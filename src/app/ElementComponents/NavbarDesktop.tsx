@@ -6,7 +6,7 @@ const NavbarDesktop = () => {
     "rounded-lg border-2 transition-all duration-200 ease-linear px-4 py-1 hover:border-light-primary";
 
   return (
-    <nav className="w-full pt-4 pr-4 fixed h-[60px] z-50 top-0 left-0 bg-light-background">
+    <nav className="w-full pt-4 pr-4 fixed h-[50px] z-50 top-0 left-0 bg-light-background">
       <ul className="flex text-md w-full justify-end gap-3">
         <li className="">
           <Link href="/" className={linkClass}>
