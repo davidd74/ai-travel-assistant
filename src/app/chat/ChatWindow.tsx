@@ -12,6 +12,7 @@ import CloseIcon from "@/public/icons/CloseIcon";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import { redirect } from "next/navigation";
+import { calcLength } from "framer-motion";
 
 const ChatWindow = () => {
   const textArea = React.createRef<HTMLTextAreaElement>();
@@ -63,6 +64,9 @@ const ChatWindow = () => {
       const updatedConversation = [...conversation, userMessage];
       setConversation(updatedConversation);
       setChatMessage("");
+
+      console.log("__ PARSED DATA ____");
+      console.log(parsedData);
 
       const response = await axios.post("/api/chat", {
         messages: updatedConversation,

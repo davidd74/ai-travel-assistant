@@ -6,6 +6,8 @@ export async function POST(request: Request) {
   const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
   const requestData = await request.json();
+  console.log(requestData);
+
   const { tripDetails, messages } = requestData;
 
   const systemPrompt = {
@@ -18,7 +20,8 @@ export async function POST(request: Request) {
     2. Give detailed answers, often times asking the user for more information so you can help them even more. 
 
     Here are trip details in JSON format so you can do your best to help the user: 
-    Destination: ${tripDetails.destination}
+
+    Destination: ${tripDetails.tripDetails.destination}
     Number of Days: ${tripDetails.itinerary.length}
 
     Here is the plan for each day of the trip in case the user asks something about specific day of the trip or the place they are visiting on one of the days: ${tripDetails.itinerary
@@ -30,8 +33,6 @@ export async function POST(request: Request) {
     Make sure to remember this itinerary AT ALL TIMES.
     `,
   };
-
-  console.log(systemPrompt);
 
   const response = await openai.chat.completions.create({
     model: "gpt-3.5-turbo",
