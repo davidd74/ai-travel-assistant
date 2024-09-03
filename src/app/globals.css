@@ -81,7 +81,7 @@ body {
 }
 
 .chat-height {
-  height: (100%);
+  height: calc(100% - 80px);
 }
 
 @media screen and (max-width: 768px) {

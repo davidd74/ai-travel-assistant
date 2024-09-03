@@ -130,31 +130,6 @@ const ChatWindow = () => {
     }`;
   };
 
-  useEffect(() => {
-    if (chatMessage && parsedData === "") {
-      textArea.current!.style.height = "auto";
-    }
-  }, [chatMessage]);
-
-  useEffect(() => {
-    if (conversation.length) {
-      setTimeout(() => {
-        div.current?.scrollIntoView({ behavior: "smooth", block: "end" });
-      }, 100); // Adjust the delay as needed
-    }
-  }, [conversation.length]);
-
-  useEffect(() => {
-    const data = localStorage.getItem("itinerary");
-    const dataParsed = JSON.parse(data || "{}");
-    if (Object.keys(dataParsed).length > 0) {
-      setParsedData(JSON.parse(dataParsed || "{}"));
-    } else {
-      toast.error("Trip not found");
-      redirect("/chat/new");
-    }
-  }, []);
-
   return (
     <>
       {parsedData.tripDetails ? (
