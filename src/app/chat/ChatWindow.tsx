@@ -9,8 +9,9 @@ import React, { useEffect } from "react";
 import Itinerary from "./Itinerary";
 import Link from "next/link";
 import CloseIcon from "@/public/icons/CloseIcon";
-import { parseSetCookie } from "next/dist/compiled/@edge-runtime/cookies";
 import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
+import { redirect } from "next/navigation";
 
 const ChatWindow = () => {
   const textArea = React.createRef<HTMLTextAreaElement>();
@@ -149,7 +150,8 @@ const ChatWindow = () => {
     if (Object.keys(dataParsed).length > 0) {
       setParsedData(JSON.parse(dataParsed || "{}"));
     } else {
-      router.push("/chat/new");
+      toast.error("Trip not found");
+      redirect("/chat/new");
     }
   }, []);
 

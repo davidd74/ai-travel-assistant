@@ -1,19 +1,20 @@
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import NavbarDesktop from "../ElementComponents/NavbarDesktop";
 
 const Hero = () => {
   return (
-    <div className="flex">
+    <div className="flex px-4">
       <div className="flex w-full pt-5 md:mt-[90px] justify-center">
         <div className="flex flex-col gap-3 items-center">
-          <h1 className="text-center font-semibold 2xl:text-6xl text-4xl 2xl:leading-[75px]">
+          <h1 className="text-center font-semibold 2xl:text-6xl text-3xl md:text-4xl 2xl:leading-[75px]">
             Discover the world with <br />
-            <span className="text-light-primary">Travel-Assistant.pro</span>
+            <span className="text-light-primary">AI Travel-Assistant</span>
           </h1>
           <p className="text-center w-4/5 sm:w-11/12 md:w-2/3">
-            AI-powered itineraries tailored just for you. Plan, book, and embark
-            on your perfect adventure effortlessly
+            AI-powered itineraries tailored just for you. Plan and book your
+            perfect adventure effortlessly
           </p>
 
           <Link href="/chat/new">

@@ -10,6 +10,8 @@ import { button } from "@nextui-org/theme";
 import toast, { Toaster } from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import axios from "axios";
+import Link from "next/link";
+import NavbarDesktop from "src/app/ElementComponents/NavbarDesktop";
 
 type AnswersType = {
   destination: string;
@@ -70,6 +72,8 @@ const Quiz: React.FC = () => {
   return (
     <div className="bg-light-background quiz-wrapper md:px-12 flex flex-col items-start justify-start md:overflow-y-scroll lg:pt-12 md:ml-[32px] max-h-screen">
       <Toaster position="top-right" />
+
+      <NavbarDesktop />
 
       <div className="flex w-full justify-center items-center flex-col">
         <Destination handleAnswer={handleAnswer} />
