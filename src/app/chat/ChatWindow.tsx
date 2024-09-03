@@ -13,6 +13,7 @@ import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import { redirect } from "next/navigation";
 import { makeBookingLink } from "../utils/makeBookingLink";
+import NavbarMobile from "../ElementComponents/NavbarMobile";
 
 const ChatWindow = () => {
   const textArea = React.createRef<HTMLTextAreaElement>();
@@ -155,52 +156,7 @@ const ChatWindow = () => {
       {parsedData.tripDetails ? (
         <>
           {/* navbar here */}
-          {openMenu && (
-            <nav className="z-20 fixed bg-light-background w-full h-screen max-h-screen overflow-hidden transition-all">
-              <div className="py-4">
-                <div className=" border-b-2">
-                  <div className="flex justify-between items-center pl-4 pb-3.5">
-                    <div className="flex gap-2 items-center">
-                      <Image
-                        src={"/images/assistant-hero.png"}
-                        width={40}
-                        height={40}
-                        alt="assistant"
-                        priority
-                        className="border-2 rounded-full border-gray-700 max-w-[170px] md:max-w-[220px]"
-                      />
-                      <h4 className="text-lg font-semibold">Travel AI</h4>
-                    </div>
-                    <button
-                      className={`p-1 right-4 bg-light-box_bg absolute rounded-lg shadow-sm border-2 hover:border-light-border transition-all duration-500 ease-out`}
-                      onClick={toggleNavbar}
-                    >
-                      <CloseIcon />
-                    </button>
-                  </div>
-                </div>
-
-                <ul className="p-4 text-2xl font-semibold space-y-2 mt-[50px]">
-                  <li>
-                    <Link
-                      href="/"
-                      className="hover:text-light-primary transition-all duration-200 ease-linear"
-                    >
-                      Home
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      href="/chat/new"
-                      className="hover:text-light-primary transition-all duration-200 ease-linear"
-                    >
-                      New Trip
-                    </Link>
-                  </li>
-                </ul>
-              </div>
-            </nav>
-          )}
+          {openMenu && <NavbarMobile toggleNavbar={toggleNavbar} />}
 
           <div className="w-full flex flex-col justify-between overflow-hidden">
             <nav className="bg-light-card_bg pl-4 flex items-center justify-start border-b-2 gap-3 py-3 fixed w-full top-0 left-0 md:hidden">
