@@ -55,7 +55,15 @@ const Quiz: React.FC = () => {
     setCreatingPlan(true);
     localStorage.clear();
 
+    const isButtonDisabled =
+      !answers.destination ||
+      Object.keys((answers.date as any).start).length === 0 ||
+      !answers.goers ||
+      answers.activities.length === 0 ||
+      answers.budget <= 0;
+
     if (isButtonDisabled) {
+      setCreatingPlan(false);
       toast.error("Please answer all the questions");
     } else {
       console.log(answers);
@@ -102,9 +110,10 @@ const Quiz: React.FC = () => {
             width={200}
             quality={100}
             priority
-            src={"https://imgur.com/Xh4TYha.gif"}
+            src={"https://i.imgur.com/Xh4TYha.gif"}
             alt="loading"
           />
+
           <p className="font-medium">Creating your itinerary...</p>
         </div>
       )}

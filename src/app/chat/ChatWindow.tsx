@@ -85,8 +85,8 @@ const ChatWindow = () => {
   };
 
   const deleteTrip = () => {
-    localStorage.clear();
     toast.success("Trip deleted");
+    localStorage.clear();
     router.push("/chat/new");
   };
 
