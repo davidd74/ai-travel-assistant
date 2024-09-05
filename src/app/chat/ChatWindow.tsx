@@ -85,8 +85,8 @@ const ChatWindow = () => {
   };
 
   const deleteTrip = () => {
-    localStorage.clear();
     toast.success("Trip deleted");
+    localStorage.clear();
     router.push("/chat/new");
   };
 
@@ -233,7 +233,7 @@ const ChatWindow = () => {
                         </Link>
                         <button
                           onClick={deleteTrip}
-                          className={`rounded-md mt-4 text-sm  px-3 py-2 bg-red-500 text-white font-medium
+                          className={`hidden md:block rounded-md mt-4 text-sm  px-3 py-2 bg-red-500 text-white font-medium
                 `}
                         >
                           Delete Trip

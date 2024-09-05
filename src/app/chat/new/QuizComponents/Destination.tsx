@@ -30,7 +30,7 @@ const Destination = ({ handleAnswer }: { handleAnswer: HandleAnswerType }) => {
 
   return (
     <>
-    <div className="h-[36px] "></div>
+      <div className="h-[36px] "></div>
       <H2Heading text="Plan your next trip" />
 
       <form className="flex relative w-4/5 md:w-2/3 lg:w-1/2 mt-4 md:mt-8 flex-col">
@@ -49,6 +49,10 @@ const Destination = ({ handleAnswer }: { handleAnswer: HandleAnswerType }) => {
           }}
           aria-placeholder="Where to?"
           placeholder="Select the destination."
+          options={{
+            types: ["(cities)"], // Restrict to cities
+            fields: ["place_id", "name", "geometry", "formatted_address"], // Exclude postal_code
+          }}
         />
         <button>
           <SearchIcon className="cursor-pointer absolute left-2.5 top-1/2 translate-y-[-45%]" />

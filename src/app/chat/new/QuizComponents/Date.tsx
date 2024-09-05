@@ -77,8 +77,6 @@ const SelectDate = ({ handleAnswer }: { handleAnswer: HandleAnswerType }) => {
   };
 
   useEffect(() => {
-    console.log(selectedRange);
-
     if (selectedRange.start && selectedRange.end) {
       setShowCalendar(false);
     }
